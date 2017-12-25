@@ -1,0 +1,16 @@
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} -s [OR]
+RewriteCond %{REQUEST_FILENAME} -l [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^.*$ - [NC,L]
+
+RewriteRule		^trang-chu.html$ 		index.php?module=default&controller=index&action=index
+RewriteRule		^tim-kiem.html$ 		index.php?module=default&controller=index&action=find
+RewriteRule		^dang-nhap.html$ 		index.php?module=default&controller=index&action=login
+RewriteRule		^dang-ki.html$ 		index.php?module=default&controller=index&action=register
+
+RewriteRule		([A-Za-z0-9_-]+)-([0-9]+)\.html 		index.php?module=default&controller=category&action=showCourse&id_category=$2
+RewriteRule		^tac-gia-(.*)/(.*)\.html$		index.php?module=default&controller=index&action=findAuthor&author=$1&author_id=$2
+RewriteRule		^tim-kiem-([A-Za-z0-9_-]+)-([A-Za-z0-9_-]+)\.html$ 		index.php?module=default&controller=index&action=findTag&tag=$2
+RewriteRule		([A-Za-z0-9_-]+)/([A-Za-z0-9_-]+)-([0-9]+)-([0-9]+)\.html 		index.php?module=default&controller=course&action=index&id_category=$3&id_course=$4

@@ -1,0 +1,275 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+input#exampleInputEmail {
+    width: 100%;
+}
+
+.form-forget {
+    width: 30%;
+    margin: auto;
+}
+
+input#exampleInputEmail2 {
+    width: 100%;
+}
+
+.carousel-caption {
+    height: 100%;
+}
+
+.carousel-caption p {
+    font-size: 3rem;
+    color: #000000;
+    background-color: #ffffff8a;
+}
+
+.carousel-caption h2 {
+    font-size: 5rem;
+    margin-top: 15%;
+    padding: 5px 0;
+    background-color: #000000a3;
+}
+
+.price {
+    top: 5px !important;
+    right: 25px !important;
+    /* font-size: 1.5rem !important; */
+}
+
+ul.list-account-info {
+    height: 29px;
+}
+
+li.ui-autocomplete-category {
+    border-top: 1px solid #dfdada;
+    padding-top: 10px;
+}
+
+li.ui-autocomplete-category i {
+    margin: 5px 15px;
+}
+
+li.ui-autocomplete-category:first-child {
+    margin-top: 10px;
+    border: none;
+    padding-top: 0px;
+}
+
+li.ui-menu-item img {
+    margin-right: 5px;
+}
+
+li.ui-menu-item {
+    padding: 10px;
+    margin-left: 30px;
+}
+
+li.ui-menu-item a {
+    margin-left: 35px;
+    font-family: 'Lora', serif;
+}
+
+li.ui-menu-item a img {
+    margin-right: 10px;
+}
+
+.sub-banner-content h2 {
+    font-family: 'Lora', serif;
+}
+
+.section-outline .section-list li .list-body {
+    padding: 8px 80px 8px 100px !important;
+}
+
+/*input tim kiem*/
+.after-slider-content .course-keyword {
+    width: 80% !important;
+}
+
+#login-content .image {
+    top: 20%;
+}
+
+a.all-course.mc-btn.btn-style-1 {
+    right: 0px !important;
+}
+
+.owl-controls.clickable {
+    left: -100px !important;
+}
+
+.feature-course:first-child {
+    margin-top: 0px;
+}
+
+.feature-course {
+    margin-top: 50px;
+}
+
+a.back-to-top i {
+    position: fixed;
+    right: 3%;
+    font-size: 4rem;
+    top: 80%;
+    z-index: 1000;
+    color: #fff;
+    background: #139DF0;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    padding: 5px 12px;
+    display: none;
+    cursor: pointer;
+}
+
+/* category */
+.sidebar-categories .widget ul li a {
+    height: 20px;
+}
+
+.mc-item h4 {
+    height: 20px;
+}
+
+h4.name-course-homepage {
+    height: 40px;
+}
+
+div#outline {
+    overflow-y: auto;
+    height: 807px;
+}
+
+h4.name-course {
+    height: 40px;
+}
+
+.section-outline .section-list .active {
+    background-color: #fff;
+    border-top: 1px solid #eee;
+}
+
+.section-outline .section-list li .active {
+    background-color: #37abf2;
+    color: #fff;
+}
+
+.ui-autocomplete-category {
+    color: #808080;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+#login-content .image {
+    top: 10% !important;
+}
+
+#login-content img {
+    width: 40%;
+}
+
+.autocomplete-suggestions {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 1px solid #999;
+    background: #FFF;
+    cursor: default;
+    overflow: auto;
+    -webkit-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64);
+    -moz-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64);
+    box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64);
+}
+
+.autocomplete-suggestion {
+    padding: 2px 5px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.autocomplete-no-suggestion {
+    padding: 2px 5px;
+}
+
+.autocomplete-selected {
+    background: #F0F0F0;
+}
+
+.autocomplete-suggestions strong {
+    font-weight: bold;
+    color: #000;
+}
+
+.autocomplete-group {
+    padding: 2px 5px;
+    font-weight: bold;
+    font-size: 16px;
+    color: #000;
+    display: block;
+    border-bottom: 1px solid #000;
+}
+
+.sub-banner-content-result h2 {
+    font-family: 'Lora', serif;
+}
+
+h4.title-box.text-uppercase {
+    font-family: 'Lora', serif;
+    font-size: 1.6rem !important;
+}
+
+#reponse-search {
+    z-index: 1000;
+    position: absolute;
+    padding: 0;
+    width: 71%;
+}
+
+#reponse-search strong {
+    color: #37abf2;
+}
+
+@media screen and (max-width: 1020px) {
+    .after-slider-content .course-keyword {
+        width: 100% !important;
+    }
+
+    #reponse-search {
+        z-index: 1000;
+        position: absolute;
+        padding: 0;
+        width: 100%;
+    }
+}
+
+.create-course-info p {
+    color: #3498db !important;
+    padding-top: 15px;
+    font-family: 'Lora', serif;
+    font-size: 1.5rem;
+}
+
+h1.big {
+    color: #3498db !important;
+}
+
+.container .create-course-info .count {
+    border: 3px solid #808080 !important;
+}
+
+.container .create-course-info .count.class3 {
+    border: 3px solid #808080 !important;
+    background-color: #808080 !important;
+}
+
+.navigation .profile {
+    background-color: transparent;
+    padding-bottom: 0px;
+    padding-top: 0px;
+}
+.content-bar ul{
+    width:100% !important;
+}

@@ -1,0 +1,58 @@
+- User -> controller User
+- 
+
+ID book:	1
+Quantity:	2
+Price:		60.000
+
+ID book:	2
+Quantity:	3
+Price:		90.000
+
+=> 5 x items | TOTAL: 150.000
+
+Show cart
+
+STT		Name	Quantity	Price	Total
+1		A		2			30.000	60.000
+2		B		3			30.000	90.000
+				->Total:			150.000 (Button: Buy)
+				
+$cart = $_SESSION['cart'];
+
+$cart[quantity][1]	= 2
+$cart[quantity][3]	= 1
+$cart[quantity][5]	= 1	=>array_sum($cart[quantity])	=> 4
+
+$cart[price][1]	= 20.000 * $cart[quantity][1]	= 40.000
+$cart[price][3]	= 30.000 * $cart[quantity][3]	= 30.000
+$cart[price][5]	= 40.000 * $cart[quantity][5]	= 40.000	=>array_sum($cart[quantity])	=> 110.000
+
+
+---
+
+- Chua ton tai:	
+	$cart[quantity][book_id]	= 1
+	$cart[price][book_id]		= 20.000
+- Ton tai:	
+	$cart[quantity][book_id]		+= 1
+	$cart[price][book_id]			= $cart[quantity][book_id] *  20.000
+	
+Đơn hàng 12a
+
+ID	Name	Price	Quantity
+1	A		20.000	2
+2	B		22.000	3
+3	C		24.000	1
+
+Đơn hàng 12b
+
+ID	Name	Price	
+1	A		20.000
+4	D		24.000
+
+
+
+
+
+
