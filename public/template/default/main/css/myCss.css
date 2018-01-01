@@ -3,6 +3,8 @@
     padding: 0px;
 }
 
+
+
 input#exampleInputEmail {
     width: 100%;
 }
@@ -270,6 +272,36 @@ h1.big {
     padding-bottom: 0px;
     padding-top: 0px;
 }
-.content-bar ul{
-    width:100% !important;
+.content-bar ul {
+    width: 100% !important;
+}
+/*css profile user */
+.appear {
+    display: block !important;
+}
+.radio-sex{
+    -webkit-appearance:radio;
+    -moz-appearance: radio;
+    -ms-progress-appearance: radio;
+    width: auto !important;
+    display: inline !important;
+    margin: 7px !important;
+    height: 13px !important;
+}
+p.sex-p {
+    display: inherit;
+}
+label.custom-button-file {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    background: cornflowerblue;
+    font-weight: bold;
+    border-radius: 7px;
+    color: white;
+    margin-top: 15px;
+}
+input#file-avatar {
+    display: none;
 }

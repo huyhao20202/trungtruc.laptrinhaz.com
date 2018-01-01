@@ -39,6 +39,7 @@ class Model
         $newSet = $this->createUpdateSQL($data);
         $newWhere = $this->createUpdateSQL($where);
         $query = "UPDATE `$table` SET " . $newSet . " WHERE $newWhere";
+
         $this->execute($query);
     }
 
@@ -114,6 +115,7 @@ class Model
     // IS EXIST
     public function isExist($query)
     {
+
         if ($query != null) {
             $stmt = $this->conn->prepare($query);
             $stmt->execute();

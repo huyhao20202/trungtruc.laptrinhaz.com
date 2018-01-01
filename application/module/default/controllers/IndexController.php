@@ -96,6 +96,9 @@ class IndexController extends Controller
 //xử lý đăng ký form
     public function registerAction()
     {
+        if(session::get('user')){
+            session::delete('user');
+        }
         if (session::get('token')) {
             if (session::get('token') == $this->_arrParam['form']['token']) {
 
@@ -120,6 +123,7 @@ class IndexController extends Controller
                     unset($this->_arrParam['form']['token']);
                     $this->_arrParam['form']['password'] = md5($this->_arrParam['form']['password']);
                     $this->_arrParam['form']['active_code']=time();
+                    $this->_arrParam['form']['created']=date('Y-m-d H:i:s');
                     $this->_model->insert(DB_TBUSER, $this->_arrParam['form']);
                     $toMail = $this->_arrParam['form']['email'];
                     $activeCode=$this->_arrParam['form']['active_code'];

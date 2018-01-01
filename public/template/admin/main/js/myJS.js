@@ -31,7 +31,7 @@ function getUrlVar(key) {
 
 // change Status
 function ajaxStatus(url) {
-    $.ajax({
+        $.ajax({
         url: url,
         type: "GET",
         dataType: "json",

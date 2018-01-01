@@ -1,5 +1,4 @@
 <?php
-
 $url = [
     'login' => URL::createLink('default', 'index', 'login', null, "dang-nhap.html"),
     'register' => URL::createLink('default', 'index', 'register', null, "dang-ki.html"),
@@ -9,6 +8,8 @@ $url = [
 ];
 
 $model = new Model();
+
+$infoUserLogin=$model->select(DB_TBUSER, Session::get('user')['info']['id'], 1);// model of profile
 $arrCourseHeader = [];
 $queryCourse[] = "SELECT co.id as `id_course`,co.name as `name_course`, ca.id as `id_category`, ca.name as `name_category` FROM `" . DB_TBCOURSE . "` as `co`";
 $queryCourse[] = "JOIN `" . DB_TBCATEGORY . "` as `ca` ON co.category_id = ca.id";
@@ -137,7 +138,13 @@ foreach ($arrCourseHeader as $key => $val) {
             <ul class="list-account-info">
                 <li class="list-item account">
                     <div class="account-info item-click">
-                        <img src="<?php echo $urlImage ?>/team-13.png" alt="">
+                        <?php if(!empty($infoUserLogin['avatar'])){
+                        ?>
+                        <img src="<?php echo $urlImage.'/avatar/'.$infoUserLogin['avatar']; ?>" alt="">
+                        <?php }else{
+                        ?>
+                        <img src="<?php echo $urlImage.'/avatar/no-avatar.png'; ?>" alt="">
+                        <?php }?>
                     </div>
                     <div class="toggle-account toggle-list">
                         <ul class="list-account">

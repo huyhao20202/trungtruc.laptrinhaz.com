@@ -28,6 +28,7 @@ class CourseController extends Controller
                 $this->_arrParam['form']['link'] = Helper::cutCharacter($this->_arrParam['form']['link'], 'list=', 5);
             }
             $validate = new Validate($this->_arrParam['form']);
+
             $queryName = "SELECT * FROM `" . $this->table . "` WHERE `name`='" . $this->_arrParam['form']['name'] . "'";
             $queryLink = "SELECT * FROM `" . $this->table . "` WHERE `link`='" . $this->_arrParam['form']['link'] . "'";
             if (isset($_FILES['image'])) {
@@ -59,7 +60,7 @@ class CourseController extends Controller
                     $query = "SELECT `id` FROM `" . $this->table . "` ORDER BY `id` DESC LIMIT 0,1";
                     $this->_model->delete($this->table, [$this->_model->execute($query, 1)[0]['id']]);
                 } else {
-                    $this->_view->success = Helper::success('Thêm thành công');
+                    $this->_view->success = Helper::success('Thêm thành công!');
                     if ($this->_arrParam['type'] == "close")
                         URL::redirect("admin", $this->table, "index");
                     elseif ($this->_arrParam['type'] == "new")

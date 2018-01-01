@@ -16,13 +16,7 @@ $url = [
                 <div class="form-login">
                     <form action="<?php echo $url['register'] ?>" method="post">
                         <h2 class="text-uppercase">sign up</h2>
-                        <div class="form-email">
-                            <input type="text" placeholder="Full Name" name="form[fullname]">
-                        </div>
-                        <div class="form-datebirth">
-                            <input type="date" placeholder="Date of Birth" name="form[birthday]"
-                                   max="<?php echo date("Y-m-d", time()) ?>">
-                        </div>
+
                         <div class="form-email">
                             <input type="email" placeholder="Email (*)" name="form[email]" autofocus required>
                             <div class="email" style="color: #fff"></div>

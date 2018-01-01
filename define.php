@@ -31,6 +31,7 @@ define('DB_TBVIDEO', 'video');
 define('DB_TBAUTHOR', 'author');
 define('DB_TBTAG', 'tag');
 define('DB_TBDESCRIPTION', 'description');
+define('DB_TBSLIDE','slide');
 
 // ====================== TIME LOGIN ===========================
 define('TIME_LOGIN', 3600);

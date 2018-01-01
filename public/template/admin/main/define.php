@@ -19,7 +19,7 @@ define('DEFAULT_ACTION', 'index');
 // ====================== DATABASE ===========================
 define('DB_HOST', 'localhost');
 define('DB_USER', 'trungtruc_tructt');
-define('DB_PASS', 'trungtruc')
+define('DB_PASS', 'trungtruc');
 define('DB_NAME', 'trungtruc_manage');
 define('DB_TABLE', '');
 
@@ -32,6 +32,7 @@ define('DB_TBVIDEO', 'video');
 define('DB_TBAUTHOR', 'author');
 define('DB_TBTAG', 'tag');
 define('DB_TBDESCRIPTION', 'description');
+define('DB_TBSLIDE','slide');
 
 // ====================== TIME LOGIN ===========================
 define('TIME_LOGIN', 3600);

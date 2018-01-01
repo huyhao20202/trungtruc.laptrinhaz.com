@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="5a168b1c-a08a-4dfe-b908-9e7fe10b091a" name="zendvn" url="http://103.68.68.151">
+        <fileTransfer host="103.68.68.151" port="21" rootFolder="/web/trungtruc.laptrinhaz.com/public_html">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" />
+          </advancedOptions>
+          <option name="port" value="21" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

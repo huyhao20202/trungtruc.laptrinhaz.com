@@ -1,5 +1,4 @@
-<?php
-?>
+
 <section id="featured-request-teacher" class="featured-request-teacher section" style="color: #0b5fc6">
     <div class="awe-parallax "></div>
     <div class="container">

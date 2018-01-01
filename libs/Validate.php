@@ -54,6 +54,7 @@ class Validate
     // Add rule
     public function addRule($element, $type, $options = null, $required = true)
     {
+
         $this->rules[$element] = array('type' => $type, 'options' => $options, 'required' => $required);
         return $this;
     }
@@ -65,11 +66,14 @@ class Validate
      */
     public function run()
     {
+
         foreach ($this->rules as $element => $value) {
             if ($value['required'] == true && trim($this->source[$element]) == null) {
                 $this->setError($element, 'Giá trị này không được rỗng!');
             } else {
+
                 switch ($value['type']) {
+
                     case 'int':
                         $this->validateInt($element, $value['options']['min'], $value['options']['max']);
                         break;
@@ -101,6 +105,7 @@ class Validate
                         $this->validateNotExistRecord($element, $value['options']);
                         break;
                     case 'string-notExistRecord':
+
                         $this->validateString($element, $value['options']['min'], $value['options']['max']);
                         $this->validateNotExistRecord($element, $value['options']);
                         break;
@@ -109,16 +114,22 @@ class Validate
                         $this->validateNotExistRecord($element, $value['options']);
                         break;
                     case 'file':
+
                         $this->validateFile($element, $value['options']);
                         break;
                 }
             }
+
             if (!array_key_exists($element, $this->errors)) {
+
                 $this->result[$element] = $this->source[$element];
+
             }
         }
+
         $eleNotValidate = array_diff_key($this->source, $this->errors);
         $this->result = array_merge($this->result, $eleNotValidate);
+
 
     }
 
@@ -133,7 +144,9 @@ class Validate
     // Validate String
     private function validateString($element, $min = 0, $max = 0)
     {
+
         $length = strlen($this->source[$element]);
+
         if ($length < $min) {
             $this->setError($element, 'is too short');
         } elseif ($length > $max) {
@@ -258,8 +271,8 @@ class Validate
     // Validate Not Exist record
     private function validateNotExistRecord($element, $options)
     {
-        $database = $options['database'];
 
+        $database = $options['database'];
         $query = $options['query'];    // SELECT id FROM user where username = 'admin'
         if ($database->isExist($query) == true) {
             $this->setError($element, 'Giá trị này đã tồn tại');
@@ -269,6 +282,7 @@ class Validate
     // Validate File
     private function validateFile($element, $options)
     {
+
         if ($this->source[$element]['name'] != null) {
             if (!filter_var($this->source[$element]['size'], FILTER_VALIDATE_INT, array("options" => array("min_range" => $options['min'], "max_range" => $options['max'])))) {
                 $this->setError($element, 'Kích thước không phù hợp');

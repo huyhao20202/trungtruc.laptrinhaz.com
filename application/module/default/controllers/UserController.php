@@ -16,6 +16,7 @@ class UserController extends Controller
     public function profileAction()
     {
 
+//change info
         if (isset($this->_arrParam['form'])) {
             if (Session::get('token') != $this->_arrParam['form']['token']) {
                 Session::set('token', $this->_arrParam['form']['token']);
@@ -26,13 +27,47 @@ class UserController extends Controller
                         $form[$key] = $value;
                     }
                 }
-                if (!empty($form)) {
-                    $this->_model->update(DB_TBUSER, $form, ['id' => Session::get('user')['info']['id']]);
-                }
-                $this->_view->success = Helper::success('Cập nhật tài khoản thành công');
+                if ($form['sex'] == "male" || $form['sex'] == "female") {
+                    $form['avatar'] = $_FILES['avatar-user'];
+                    if (!empty($form['avatar']['name'])) {
 
+                        $nameAvatar = URL::filterURL($form['avatar']['name']);
+                        $stringRandom = URL::generateRandomString(10);
+                        $form['avatar']['name'] = $stringRandom . $nameAvatar;
+                        $validate = new Validate($form);
+                        $validate->addRule('avatar', 'file', ['min' => 1000, 'max' => 2097152, 'extension' => ['jpg', 'png', 'jpeg']], false);
+                        $validate->run();
+                        if ($validate->isValid() == false) {
+                            $this->_view->error = $validate->showErrors();
+
+                        } else {
+                            $removeAvatar = $this->_model->select(DB_TBUSER, Session::get('user')['info']['id'], 1);
+                            $removeLink = TEMPLATE_PATH . "/default/main/images/avatar/" . $removeAvatar['avatar'];
+                            $form['avatar'] = $form['avatar']['name'];
+                            $form['modified']=date("Y-m-d",time());
+                            $form['modified_by']=session::get('user')['info']['id'];
+                            $this->_model->update(DB_TBUSER, $form, ['id' => Session::get('user')['info']['id']]);
+                            $folderUpload = TEMPLATE_PATH . "/default/main/images/avatar/" . $form['avatar'];
+                            if (file_exists($removeLink)) {
+                                unlink($removeLink);
+                            }
+                            move_uploaded_file($_FILES['avatar-user']['tmp_name'], $folderUpload);
+
+                            $this->_view->success = Helper::success('Cập nhật tài khoản thành công');
+                        }
+                    } else {
+                        $this->_arrParam['form']['modified']=date("Y-m-d",time());
+                        $this->_arrParam['form']['modified_by']=session::get('user')['info']['id'];
+                        $this->_model->update(DB_TBUSER, $this->_arrParam['form'], ['id' => Session::get('user')['info']['id']]);
+
+                        $this->_view->success = Helper::success('Cập nhật tài khoản thành công');
+                    }
+                } else {
+                    $this->_view->error = Helper::showErrors('Giá trị sex không hợp lệ!');
+                }
             }
         }
+//        change Password
         if (isset($this->_arrParam['pass'])) {
             if (Session::get('token') != $this->_arrParam['token']) {
                 Session::set('token', $this->_arrParam['token']);
@@ -50,14 +85,15 @@ class UserController extends Controller
         $this->_view->render($this->table . "/profile");
     }
 
-//check password in section profile
-    public function checkPasswordAction()
+//check password in section profile ajax
+    public
+    function checkPasswordAction()
     {
 
-        if (isset($this->_arrParam['pass']) && isset($this->_arrParam['email']) ) {
+        if (isset($this->_arrParam['pass']) && isset($this->_arrParam['email'])) {
             $pass = md5($this->_arrParam['pass']);
             $email = $this->_arrParam['email'];
-            if ($this->_model->checkPassExist($pass,$email) == false) {
+            if ($this->_model->checkPassExist($pass, $email) == false) {
                 echo "no";
             } else {
                 echo "yes";
@@ -66,8 +102,12 @@ class UserController extends Controller
     }
 
 // send mail
-    public function becomeMemberAction()
+    public
+    function becomeMemberAction()
     {
+        if (session::get('user')) {
+            session::delete('user');
+        }
 
         if (isset($this->_arrParam['email']) && session::get('email') != $this->_arrParam['email']) {
             session::set('email', $this->_arrParam['email']);
@@ -81,21 +121,27 @@ class UserController extends Controller
         }
     }
 
-    public function activeRegisterAction()
+    public
+    function activeRegisterAction()
     {
         $this->_model->userActive($this->_arrParam['userId'], $this->_arrParam['active_code']);
         $this->_view->render($this->table . "/becomeMember");
     }
 
-    public function logoutAction()
+    public
+    function logoutAction()
     {
         Session::delete('user');
         URL::redirect('default', 'index', 'index', null, "trang-chu.html");
     }
 
-    //forget password
-    public function forgetAction()
+//forget password
+    public
+    function forgetAction()
     {
+        if (session::get('user')) {
+            session::delete('user');
+        }
 
         if (isset($this->_arrParam['form'])) {
 
@@ -113,10 +159,13 @@ class UserController extends Controller
         $this->_view->render($this->table . '/forget');
     }
 
-    //change Password for function forgetPassword
-    public function changePassAction()
+//change Password for function forgetPassword
+    public
+    function changePassAction()
     {
-
+        if (session::get('user')) {
+            session::delete('user');
+        }
         if (isset($this->_arrParam['form'])) {
             $newPass = md5($this->_arrParam['form']['newPass']);
             $this->_model->updatePass($this->_arrParam['userId'], $newPass);
