@@ -1,11 +1,10 @@
 <?php
 
 $listVideo = $this->video;
+
 $listCourseRelative = $this->listCourseRelative;
 $infoCourse = $this->course;
 $url = $_SERVER['REQUEST_URI'];
-
-
 $nameAuthor = URL::filterURL($listVideo[0]['name_author']);
 $authorID = URL::filterURL($listVideo[0]['author_id']);
 $urlFindAuthor = URL::createLink('default', 'index', 'findAuthor', ['author' => $nameAuthor, 'author_id' => $authorID], "tac-gia-$nameAuthor/$authorID.html");
@@ -37,7 +36,7 @@ $urlFindAuthor = URL::createLink('default', 'index', 'findAuthor', ['author' => 
                             <div class="progress-run"></div>
                         </div>
                         <ul class="current-outline">
-                            <li><span><?php echo count($this->video) ?></span>Video</li>
+                            <li><span><?php echo $countProcess . "/" . count($this->video) ?></span>Video</li>
 
                         </ul>
                     </div>
@@ -45,7 +44,16 @@ $urlFindAuthor = URL::createLink('default', 'index', 'findAuthor', ['author' => 
 
                     <div class="video-course-intro">
                         <div class="video embed-responsive embed-responsive-16by9">
-                            <iframe src="https://www.youtube.com/embed/<?php echo $this->video[0]['link'] ?>"
+                            <iframe src="https://www.youtube.com/embed/<?php
+                            if (isset($this->arrParam['id_video'])) {
+                                foreach ($listVideo as $value) {
+                                    if ($this->arrParam['id_video'] == $value['video_id']) {
+                                        echo $value['link'];
+                                    }
+                                }
+                            } else {
+                                echo $listVideo[0]['link'];
+                            } ?>"
                                     frameborder="0" allowfullscreen class="embed-responsive-item">
                             </iframe>
                         </div>
@@ -147,7 +155,8 @@ $urlFindAuthor = URL::createLink('default', 'index', 'findAuthor', ['author' => 
                                                 <i class="icon md-camera"></i>
                                                 <p><a href="#" class="name-video"
                                                       id="video-<?php echo $infoVideo['video_id'] ?>"
-                                                      link="<?php echo $infoVideo['link'] ?>"><?php echo $infoVideo['title'] ?></a>
+                                                      link="<?php echo $infoVideo['link'] ?>" data-toggle="modal"
+                                                      data-target="#myModal"><?php echo $infoVideo['title'] ?></a>
                                                 </p>
                                                 <div class="download">
                                                     <div class="download-ct">
@@ -183,6 +192,33 @@ $urlFindAuthor = URL::createLink('default', 'index', 'findAuthor', ['author' => 
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" style="color: #000000"></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="video-course-intro">
+                        <div class="video embed-responsive embed-responsive-16by9">
+                            <iframe src="https://www.youtube.com/embed/<?php echo $listVideo[0]['link']; ?>"
+
+                                    frameborder="0" allowfullscreen class="embed-responsive-item">
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
         </div>
     </div>
 </section>

@@ -63,10 +63,6 @@ $url = [
                                                 <th class="sorting_asc">Picture</th>
                                                 <th>Title</th>
                                                 <th>Content</th>
-                                                <th>Created</th>
-                                                <th>Created by</th>
-                                                <th>Modified</th>
-                                                <th>Modified By</th>
                                                 <th>Status</th>
                                                 <th>Ordering</th>
                                                 <th>ID</th>
@@ -86,14 +82,10 @@ $url = [
                                                             <?php echo $value['title'] ?></a>
                                                     </td>
                                                     <td><?php echo $value['content'] ?></td>
-                                                    <td><?php echo $value['created'] ?></td>
-                                                    <td><?php echo $value['created_by'] ?></td>
-                                                    <td><?php echo $value['modified'] ?></td>
-                                                    <td><?php echo $value['modified_by'] ?></td>
                                                     <td class="text-center status">
                                                         <?php
                                                         $onclick = URL::createLink('admin', DB_TBSLIDE, 'ajaxStatus', ['id' => $value['id'], 'status' => $value['status']]);
-                                                        echo '<i onclick="javascript:ajaxStatus(\'' . $onclick . '\')" id="status-' . $value['id'] . '">' . ($value['status'] ? 'on' : 'off') . '</i>';
+                                                        echo '<i aria-hidden="true" onclick="javascript:ajaxStatus(\'' . $onclick . '\')" id="status-' . $value['id'] . '" class="fa '.($value['status'] ? 'fa-toggle-on' : 'fa-toggle-off').'"> </i>';
                                                         ?>
                                                     </td>
                                                     <td><?php echo $value['ordering'] ?></td>

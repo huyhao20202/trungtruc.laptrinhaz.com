@@ -38,14 +38,18 @@ function ajaxStatus(url) {
         success: function (data, status) {
             var element = ".status i#status-" + data['id'];
             if (data['status'] == 0) {
+                $(element).attr("class","fa fa-toggle-off");
                 $(element).attr({
                     onclick: "javascript:ajaxStatus('" + data['link'] + "')"
-                }).text('off');
+                });
+
             }
             else {
+                $(element).attr("class","fa fa-toggle-on");
                 $(element).attr({
                     onclick: "javascript:ajaxStatus('" + data['link'] + "')"
-                }).text('on');
+                });
+
             }
         }
     });

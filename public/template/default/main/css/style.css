@@ -5571,14 +5571,14 @@ footer#footer.footer-style-2 {
   text-overflow: ellipsis;
 }
 .table-wrap .table-body .table-item {
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 2px;
+  margin-bottom: 1px;
 }
 .table-wrap .table-body .table-item .thead {
   overflow: hidden;
   border: 1px solid #ddd;
   background-color: #fff;
-  padding: 18px 0;
+  padding: 6px 0;
   cursor: pointer;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -5647,7 +5647,7 @@ footer#footer.footer-style-2 {
   overflow: hidden;
 }
 .table-wrap .table-body .table-item .tbody .item {
-  padding: 15px 0;
+  padding: 4px 0;
   overflow: hidden;
   background-color: #eee;
   border-bottom: 1px solid #e1e1e1;

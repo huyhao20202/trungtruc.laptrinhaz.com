@@ -70,11 +70,39 @@ class CourseController extends Controller
 
     public function activeMenuAction()
     {
-
-
         if (isset($this->_arrParam['nameMenu'])) {
             Session::set('nameMenu', $this->_arrParam['nameMenu']);
         }
+    }
+    //compute point
+    public function pointAction(){
+
+        if(session::get('user')){
+            $idUser=session::get('user')['info']['id'];
+            $dataUser=$this->_model->show('user',$idUser);
+            $point=trim(Helper::cutCharacter($this->_arrParam['idVideo'],'-',1));
+            if(empty($dataUser['point'])){
+                $arrPoint=[];
+                $arrPoint[]=$point;
+                $strArrPoint=serialize($arrPoint);
+                $query="UPDATE `user` SET `point`='".$strArrPoint."' WHERE id=$idUser";
+                $this->_model->execute($query);
+
+            }else{
+                $arrPoint=unserialize($dataUser['point']);
+                if(!in_array($point,$arrPoint)){
+                    $arrPoint[]=$point;
+                }
+                $strArrPoint=serialize($arrPoint);
+                $query="UPDATE `user` SET `point`='".$strArrPoint."' WHERE id=$idUser";
+                $this->_model->execute($query);
+            }
+
+
+
+        }
+
+
 
 
     }

@@ -43,7 +43,7 @@ class SlideModel extends Model
             return $result;
         }
     }
-    public function updateSlide($dataUpdate,$where,$dataOld){
+    public function updateSlide($dataUpdate,$where,$dataOld=null){
 
         $oldNamePicture=$dataOld['picture'];
         $customData=[];
@@ -55,12 +55,16 @@ class SlideModel extends Model
         $customData['modified'] = date('Y-m-d');
         $customData['modified_by'] = Session::get("user")['info']['username'];
         $this->update(DB_TBSLIDE, $customData, $where);
-        $linkPictureOld=TEMPLATE_PATH."/default/main/images/homeslider/".$oldNamePicture;
-        $link=TEMPLATE_PATH."/default/main/images/homeslider/".$picture['name'];
-        if (file_exists($linkPictureOld)){
-            unlink($linkPictureOld);
+        if (!empty($dataOld)){
+            $link=TEMPLATE_PATH."/default/main/images/homeslider/".$picture['name'];
+            $linkPictureOld=TEMPLATE_PATH."/default/main/images/homeslider/".$oldNamePicture;
+            if (file_exists($linkPictureOld)){
+                unlink($linkPictureOld);
+            }
+            move_uploaded_file($picture['tmp_name'],$link);
         }
-        move_uploaded_file($picture['tmp_name'],$link);
+
+
     }
 
 

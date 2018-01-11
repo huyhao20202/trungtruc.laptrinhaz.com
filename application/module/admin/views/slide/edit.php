@@ -6,6 +6,9 @@ $url = [
     'save-new' => URL::createLink('admin', DB_TBSLIDE, 'edit', ['type' => 'new','id'=>$this->arrParam['id']]),
     'cancel' => URL::createLink('admin', DB_TBSLIDE, 'index')
 ];
+//echo "<pre>";
+//print_r($infoItemEdit);
+//echo "</pre>";
 ?>
 <div class="content-wrapper" style="min-height: 915.8px;">
     <section class="content-header">
@@ -83,7 +86,7 @@ $url = [
                                     <input type="file" class="form-control" onchange="readURL(this);"
                                            name="picture">
                                     <div class="blah">
-                                        <img id="blah" src="#" height="50px"/>
+                                        <img id="blah" src="<?php echo TEMPLATE_URL.'/default/main/images/homeslider/'.$infoItemEdit['picture']?>" style="width: 200px; height: 100px"/>
                                     </div>
                                 </div>
                             </div>

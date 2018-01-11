@@ -53,4 +53,7 @@ class UserModel extends Model
        return $this->isExist($query);
 
     }
+//    public function pointUser(){
+//
+//    }
 }

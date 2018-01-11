@@ -193,7 +193,6 @@ $(function () {
 
 // change Status Onclick
 function ajaxStatus(url) {
-
     $.ajax({
         url: url,
         type: "GET",

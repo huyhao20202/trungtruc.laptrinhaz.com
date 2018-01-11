@@ -6,6 +6,8 @@ $(function () {
         $('html,body').animate({scrollTop: 250}, 500);
         var pre = $(this).attr("id");
         var id = "#" + pre;
+        var title=$(this).text().trim();
+        $(".modal-title").text(title);
         $(id).parents(".o-view").addClass("active");
         $(id).parents(".o-view").children(".count").addClass("active");
         $(this).parents(".list-body").children(".div-x").children().addClass("md-check-2");
@@ -18,9 +20,10 @@ $(function () {
             type: 'POST',
             data: {videoId: pre},
             success: function (data) {
-                console.log(data);
+                // console.log(data);
             }
         })
+
     })
     $('.div-x').click(function () {
         var id = $(this).parents(".list-body").children().children(".name-video").attr("id");
@@ -34,7 +37,7 @@ $(function () {
                 type: 'POST',
                 data: {'videoId': id},
                 success: function (data) {
-                    console.log(data);
+                    // console.log(data);
                 }
             })
         } else {
@@ -43,7 +46,7 @@ $(function () {
                 type: 'POST',
                 data: {deleteId: id},
                 success: function (data) {
-                    console.log(data);
+                    // console.log(data);
                 }
             })
         }
@@ -57,10 +60,23 @@ $(function () {
             type: 'POST',
             data: {nameMenu: text},
             success: function (data) {
-                console.log(data);
+                // console.log(data);
             }
         });
 
     });
+    // js compute point
+    $('.section-list .name-video').click(function () {
+        var idVideo=$(this).attr('id');
+        $.ajax({
+            url: ROOT_URL + 'index.php?module=default&controller=course&action=point',
+            type: 'POST',
+            data:{idVideo: idVideo},
+            success: function (data) {
+                console.log(data);
+            }
+        })
+    })
+
 
 });

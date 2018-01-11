@@ -12,7 +12,7 @@ RewriteRule		^dang-ki.html$ 		index.php?module=default&controller=index&action=r
 RewriteRule		^profile.html$ 		index.php?module=default&controller=user&action=profile
 RewriteRule		^becomeMember.html$ 		index.php?module=default&controller=user&action=becomeMember
 RewriteRule     ^forget-password.html$      index.php?module=default&controller=user&action=forget
-#RewriteRule     ^changePassword.html$      index.php?module=default&controller=user&action=changePass
+
 
 RewriteRule		^changePassword-(.*)-(.*)\.html$ 		index.php?module=default&controller=user&action=changePass&email=$1&userId=$2
 RewriteRule		^becomeMember-(.*)-(.*)\.html$ 		index.php?module=default&controller=user&action=becomeMember&email=$1&active_code=$2
@@ -21,3 +21,4 @@ RewriteRule		([A-Za-z0-9_-]+)-([0-9]+)\.html 		index.php?module=default&controll
 RewriteRule		^tac-gia-(.*)/(.*)\.html$		index.php?module=default&controller=index&action=findAuthor&author=$1&author_id=$2
 RewriteRule		^tim-kiem-([A-Za-z0-9_-]+)-([A-Za-z0-9_-]+)\.html$ 		index.php?module=default&controller=index&action=findTag&tag=$2
 RewriteRule		([A-Za-z0-9_-]+)/([A-Za-z0-9_-]+)-([0-9]+)-([0-9]+)\.html 		index.php?module=default&controller=course&action=index&id_category=$3&id_course=$4
+RewriteRule		([A-Za-z0-9_-]+)/([A-Za-z0-9_-]+)-([0-9]+)-([0-9]+)-([0-9]+)\.html 		index.php?module=default&controller=course&action=index&id_category=$3&id_course=$4&id_video=$5

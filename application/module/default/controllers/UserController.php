@@ -44,8 +44,8 @@ class UserController extends Controller
                             $removeAvatar = $this->_model->select(DB_TBUSER, Session::get('user')['info']['id'], 1);
                             $removeLink = TEMPLATE_PATH . "/default/main/images/avatar/" . $removeAvatar['avatar'];
                             $form['avatar'] = $form['avatar']['name'];
-                            $form['modified']=date("Y-m-d",time());
-                            $form['modified_by']=session::get('user')['info']['id'];
+                            $form['modified'] = date("Y-m-d", time());
+                            $form['modified_by'] = session::get('user')['info']['id'];
                             $this->_model->update(DB_TBUSER, $form, ['id' => Session::get('user')['info']['id']]);
                             $folderUpload = TEMPLATE_PATH . "/default/main/images/avatar/" . $form['avatar'];
                             if (file_exists($removeLink)) {
@@ -56,8 +56,8 @@ class UserController extends Controller
                             $this->_view->success = Helper::success('Cập nhật tài khoản thành công');
                         }
                     } else {
-                        $this->_arrParam['form']['modified']=date("Y-m-d",time());
-                        $this->_arrParam['form']['modified_by']=session::get('user')['info']['id'];
+                        $this->_arrParam['form']['modified'] = date("Y-m-d", time());
+                        $this->_arrParam['form']['modified_by'] = session::get('user')['info']['id'];
                         $this->_model->update(DB_TBUSER, $this->_arrParam['form'], ['id' => Session::get('user')['info']['id']]);
 
                         $this->_view->success = Helper::success('Cập nhật tài khoản thành công');
@@ -81,9 +81,58 @@ class UserController extends Controller
                 }
             }
         }
+        // statistical vs point
+        $idUser = session::get('user')['info']['id'];
+        $dataUser = $this->_model->show('user', $idUser);
+        $arrPoint = unserialize($dataUser['point']);
+        $dataVideo = [];
+        $data = [];
+        $queryVideo = $queryVideo = "SELECT `cs`.`id` AS `id_course`,`c`.`id` AS `id_category`,`cs`.`name` AS `name_course`,`c`.`name` AS `name_category`
+                                                                                                          FROM `course`AS `cs` INNER JOIN `category` AS `c`
+                                                                                                            ON `cs`.`category_id`=`c`.`id` ";
+        $listVideo = $this->_model->execute($queryVideo, true);
+
+        $queryAllVideo="SELECT COUNT(`id`) AS `allVideo`FROM `" . DB_TBVIDEO . "`";
+        $allVideo=$this->_model->execute($queryAllVideo, true);
+        foreach ($listVideo as $key => $value1) {
+            $queryTotalVideo = "SELECT COUNT(`id`) AS `totalVideo`,`course_id` FROM `" . DB_TBVIDEO . "`WHERE `course_id`=" . $value1['id_course'];
+            $listVideo[$key]['totalVideo'] = $this->_model->execute($queryTotalVideo, true)[0]['totalVideo'];
+        }
+
+        foreach ($arrPoint as $value) {
+            $dataVideo[] = $this->_model->show('video', $value);
+        }
+
+        foreach ($listVideo as $key => $value) {
+            $number = 0;
+            foreach ($dataVideo as $valueId) {
+                if ($value['id_course'] == $valueId['course_id']) {
+                    $data[$value['id_course']]['name_course'] = $value['name_course'];
+                    $data[$value['id_course']]['name_category'] = $value['name_category'];
+                    $data[$value['id_course']]['title_video'][$valueId['id']] = $valueId['title'];
+                    $data[$value['id_course']]['numVideo'] = ++$number;
+                    $data[$value['id_course']]['totalVideo'] = $value['totalVideo'];
+                    $data[$value['id_course']]['id_course'] = $valueId['course_id'];
+                    $data[$value['id_course']]['id_category'] = $value['id_category'];
+                }
+            }
+        }
+        //start code compute point
+        if(!empty($arrPoint) && count($arrPoint)< $allVideo[0]['allVideo'] ){
+            $this->_view->point= count($arrPoint);
+        }
+        elseif (count($arrPoint)> $allVideo[0]['allVideo']){
+            $this->_view->point= $allVideo[0]['allVideo'];
+        }
+        else{
+            $this->_view->point= 0;
+        }
+        //end code compute point
+        $this->_view->videoViewed = $data;
         $this->_view->infoUser = $this->_model->select(DB_TBUSER, Session::get('user')['info']['id'], 1);
         $this->_view->render($this->table . "/profile");
     }
+//end profileAction-------
 
 //check password in section profile ajax
     public

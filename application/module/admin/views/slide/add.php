@@ -84,7 +84,7 @@ $url = [
                                     <input type="file" class="form-control" onchange="readURL(this);"
                                            name="picture">
                                     <div class="blah">
-                                        <img id="blah" src="#" height="50px"/>
+                                        <img id="blah" src="#" style="width: 200px;height: 100px"/>
                                     </div>
                                 </div>
                             </div>

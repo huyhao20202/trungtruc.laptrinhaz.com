@@ -305,3 +305,24 @@ label.custom-button-file {
 input#file-avatar {
     display: none;
 }
+/*point of profile*/
+li.active.point {
+    width: 100%;
+    text-align: center;
+    font-size: 30px;
+}
+.point a {
+    color: #37ABF2 !important;
+}
+.statistical{
+    font-size: 20px;
+}
+.nav-tabsOne{
+    margin: 0;
+    padding: 25px;
+    list-style: none;
+    font-weight: 700;
+    font-family: 'Lato', sans-serif;
+    border-bottom: 1px solid #ddd;
+
+}
