@@ -4,7 +4,7 @@ $url = [
     'register' => URL::createLink('default', 'index', 'register', null, "dang-ki.html"),
     'home' => URL::createLink("default", "index", "index", null, "trang-chu.html"),
     'profile' => URL::createLink("default", "user", "profile", null, "profile.html"),
-    'logout' => URL::createLink("default", "user", "logout")
+    'logout' => URL::createLink("default", "user", "logout",null,"dang-xuat.html")
 ];
 
 $model = new Model();

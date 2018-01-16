@@ -9,7 +9,7 @@ class CourseModel extends Model
 
     public function showCourse()
     {
-        $query[] = "SELECT co.sourse,co.tag,COUNT(v.course_id) as 'total_video',co.id,co.name,co.link,ca.name as 'category',co.created,co.created_by,co.modified,co.modified_by,co.status, co.image, au.name as `author`";
+        $query[] = "SELECT co.sourse,co.tag,COUNT(v.course_id) as 'total_video',co.id,co.name,co.link,ca.name as 'category',co.created,co.created_by,co.modified,co.modified_by,co.status, co.image, au.name as `author`,co.course as `course`";
         $query[] = "FROM `" . DB_TBCOURSE . "` AS `co`";
         $query[] = "LEFT JOIN `" . DB_TBCATEGORY . "` AS `ca` ON `co`.category_id=`ca`.id";
         $query[] = "JOIN `" . DB_TBVIDEO . "` AS `v` ON v.course_id=co.id";
@@ -45,6 +45,7 @@ class CourseModel extends Model
 
     public function insertCourse($data)
     {
+
         $image = $data['image'];
 
         $data['name'] = trim($data['name']);

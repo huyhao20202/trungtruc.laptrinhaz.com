@@ -43,4 +43,5 @@ class UserController extends Controller
         $this->_view->userInfo = $this->_model->show(DB_TBUSER, Session::get("user")['info']['id']);
         $this->_view->render('user/profile');
     }
+
 }

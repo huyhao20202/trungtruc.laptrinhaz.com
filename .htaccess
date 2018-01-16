@@ -8,10 +8,12 @@ RewriteRule ^.*$ - [NC,L]
 RewriteRule		^trang-chu.html$ 		index.php?module=default&controller=index&action=index
 RewriteRule		^tim-kiem.html$ 		index.php?module=default&controller=index&action=find
 RewriteRule		^dang-nhap.html$ 		index.php?module=default&controller=index&action=login
+RewriteRule		^dang-xuat.html$ 		index.php?module=default&controller=user&action=logout
 RewriteRule		^dang-ki.html$ 		index.php?module=default&controller=index&action=register
 RewriteRule		^profile.html$ 		index.php?module=default&controller=user&action=profile
 RewriteRule		^becomeMember.html$ 		index.php?module=default&controller=user&action=becomeMember
 RewriteRule     ^forget-password.html$      index.php?module=default&controller=user&action=forget
+RewriteRule     ^convert-point.html$      index.php?module=default&controller=user&action=convertPoint
 
 
 RewriteRule		^changePassword-(.*)-(.*)\.html$ 		index.php?module=default&controller=user&action=changePass&email=$1&userId=$2

@@ -79,12 +79,19 @@ $url = [
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label class="col-sm-3 text-right control-label">Status<i style="color: red"> *</i></label>
+                                <div class="col-sm-3">
+                                    <input type="radio" name="form[status]" value="1" checked >On
+                                    <input type="radio" name="form[status]" value="0" <?php if (isset($infoItem['status']) && $infoItem['status'] == 0){ echo "checked";}?>>Off
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label class="col-sm-3 text-right control-label">Picture</label>
                                 <div class="col-sm-6">
                                     <input type="file" class="form-control" onchange="readURL(this);"
                                            name="picture">
                                     <div class="blah">
-                                        <img id="blah" src="#" style="width: 200px;height: 100px"/>
+                                        <img id="blah" src="" />
                                     </div>
                                 </div>
                             </div>

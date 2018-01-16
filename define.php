@@ -49,6 +49,8 @@ define('FILE_PLAYLIST_JSON', 'data/playlists.json');
 // ====================== DOMAIN ===========================
 
 define('DOMAIN', 'http://trungtruc.laptrinhaz.com');
+// ====================== NOTICE ===========================
+define('NOTICE_USER_VIEW_VIDEO', 'Bạn đã được cộng 1 điểm');
 
 
 

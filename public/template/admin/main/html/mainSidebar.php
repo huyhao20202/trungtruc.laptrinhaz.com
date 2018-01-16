@@ -7,7 +7,9 @@ $url = array(
     'author' => URL::createLink('admin', 'author', 'index'),
     'tag' => URL::createLink('admin', 'tag', 'index'),
     'description' => URL::createLink('admin', 'description', 'index'),
-    'slide' => URL::createLink('admin','slide','index')
+    'slide' => URL::createLink('admin','slide','index'),
+    'point' => URL::createLink('admin','point','index'),
+    'changePoint' => URL::createLink('admin','point','changePoint')
 );
 $model = new Model();
 $query = "SELECT `id`,`name` FROM `" . DB_TBCOURSE . "` ORDER BY `name`";
@@ -92,12 +94,36 @@ $userInfo = Session::get("user")['info'];
                     <span>Author</span>
                 </a>
             </li>
-            <li class="author">
+            <li class="slide">
                 <a href="<?php echo $url['slide'] ?>">
                     <i class="fa fa-file-picture-o" aria-hidden="true"></i>
                     <span>Slide</span>
                 </a>
             </li>
+
+            <li class="treeview point">
+                <a href="">
+                    <i class="fa fa-building-o" aria-hidden="true"></i>
+                    <span>Point</span>
+                    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="manage">
+                        <a href="<?php echo $url['point'] ?>">
+                            <i class='fa fa-circle-o'></i>
+                            <span>Manage point</span>
+
+                        </a>
+                    </li>
+                    <li class="change">
+                        <a href="<?php echo $url['changePoint'] ?>">
+                            <i class='fa fa-circle-o'></i>
+                            <span>Change point</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
             <li class="tag">
                 <a href="<?php echo $url['tag'] ?>">
                     <i class="fa fa-tag"></i>

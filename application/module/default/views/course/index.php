@@ -1,9 +1,13 @@
 <?php
 
 $listVideo = $this->video;
-
 $listCourseRelative = $this->listCourseRelative;
 $infoCourse = $this->course;
+//handle link course
+$course[]=explode("https:",$infoCourse['course']);
+unset($course[0][0]);
+//end link course
+
 $url = $_SERVER['REQUEST_URI'];
 $nameAuthor = URL::filterURL($listVideo[0]['name_author']);
 $authorID = URL::filterURL($listVideo[0]['author_id']);
@@ -125,7 +129,9 @@ $urlFindAuthor = URL::createLink('default', 'index', 'findAuthor', ['author' => 
                         <li class="active"><a href="#outline" role="tab" data-toggle="tab">Menu Video</a></li>
                         <li><a href="#announcement" role="tab" data-toggle="tab">Sourse Code</a></li>
                         <li class="itemnew"><a href="#discussion" role="tab" data-toggle="tab">Facebook Comment</a></li>
-
+                        <?php if (!empty($infoCourse['course'])){?>
+                        <li class="course"><a href="#relate-course" role="tab" data-toggle="tab">Relate Course</a></li>
+                        <?php }?>
                     </ul>
                     <!-- Tab panes -->
                     <div class="tab-content">
@@ -156,7 +162,7 @@ $urlFindAuthor = URL::createLink('default', 'index', 'findAuthor', ['author' => 
                                                 <p><a href="#" class="name-video"
                                                       id="video-<?php echo $infoVideo['video_id'] ?>"
                                                       link="<?php echo $infoVideo['link'] ?>" data-toggle="modal"
-                                                      data-target="#myModal"><?php echo $infoVideo['title'] ?></a>
+                                                      data-target="#myModal" ><?php echo $infoVideo['title'] ?></a>
                                                 </p>
                                                 <div class="download">
                                                     <div class="download-ct">
@@ -189,6 +195,19 @@ $urlFindAuthor = URL::createLink('default', 'index', 'findAuthor', ['author' => 
                             </div>
                         </div>
                         <!-- END / DISCUSSION -->
+
+                        <!-- Relate course -->
+                        <div class="tab-pane fade" id="relate-course">
+                            <h4 class="pr-course">Để nâng cao khả năng lập trình, bạn hãy tham khảo các khóa học nâng cao của Zendvn bên dưới. </h4>
+                            <h4 class="sm black bold">Link Course:</h4>
+                            <?php foreach ($course as $value){
+                                    foreach ($value as$valueOne){
+                                        echo "<a target='_blank' href='https:".$valueOne."'>https:".$valueOne."</a><br/>";
+                                    }
+                            }?>
+                        </div>
+                        <!-- END / Relate course -->
+
                     </div>
                 </div>
             </div>
@@ -221,6 +240,7 @@ $urlFindAuthor = URL::createLink('default', 'index', 'findAuthor', ['author' => 
 
         </div>
     </div>
+
 </section>
 <!-- END / COURSE TOP -->
 
@@ -237,7 +257,8 @@ $urlFindAuthor = URL::createLink('default', 'index', 'findAuthor', ['author' => 
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));</script>
 <?php
-$session = Session::get('nameMenu')
+$session = Session::get('nameMenu');
+
 ?>
 <script type="text/javascript">
 

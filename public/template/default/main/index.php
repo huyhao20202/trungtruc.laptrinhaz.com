@@ -32,11 +32,18 @@ $urlFile = TEMPLATE_URL . '/default/main';
     <script type="text/javascript">
         root_url =  <?php echo json_encode(ROOT_URL . "/")  ?>;
         const ROOT_URL = root_url;
+
+    </script>
+    <script type="text/javascript">
+        notice =  <?php echo json_encode(NOTICE_USER_VIEW_VIDEO)  ?>;
+        const NOTICE_USER_VIEW_VIDEO = notice;
+
     </script>
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
     <![endif]-->
+
 </head>
 <body id="page-top" class="home">
 

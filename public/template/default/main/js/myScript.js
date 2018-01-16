@@ -67,16 +67,53 @@ $(function () {
     });
     // js compute point
     $('.section-list .name-video').click(function () {
+
+
+
         var idVideo=$(this).attr('id');
         $.ajax({
             url: ROOT_URL + 'index.php?module=default&controller=course&action=point',
             type: 'POST',
+            dataType:"text",
             data:{idVideo: idVideo},
             success: function (data) {
-                console.log(data);
+                if(data=="yes"){
+                    $.notify({
+                        // options
+                        icon: 'https://zendvn.com/wp-content/uploads/2016/12/zendvn-logo3.png',
+                        title: 'Chúc mừng!',
+                        message: NOTICE_USER_VIEW_VIDEO
+                    }, {
+                        // settings
+                        type: 'info',
+                        z_index: 2000,
+                        placement: {
+                            from: "bottom",
+                            align: "right"
+                        },
+                        animate: {
+                            enter: 'animated fadeInDown',
+                            exit: 'animated fadeOutUp'
+                        },
+                        icon_type: 'image',
+                        template: '<div data-notify="container" class="col-xs-11 col-sm-3 alert alert-{0}" role="alert">' +
+                        '<img data-notify="icon" class="img-circle pull-left">' +
+                        '<span data-notify="title">{1}</span>' +
+                        '<span data-notify="message">{2}</span>' +
+                        '</div>'
+                    });
+                }
+
+
             }
         })
+
+
     })
 
 
+
 });
+
+
+

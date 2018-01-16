@@ -88,7 +88,7 @@ $url = [
                                 <div class="col-sm-6">
                                     <input type="file" class="form-control" onchange="readURL(this);" name="image">
                                     <div class="blah">
-                                        <img id="blah" src="#" height="50px"/>
+                                        <img id="blah" src="" height="50px"/>
                                     </div>
                                 </div>
                             </div>
@@ -98,7 +98,7 @@ $url = [
                                     <input type="file" class="form-control" onchange="readURLThumbnail(this);"
                                            name="imageThumbnail">
                                     <div class="blah">
-                                        <img id="blahThumbnail" src="#" height="50px"/>
+                                        <img id="blahThumbnail" src="" height="50px"/>
                                     </div>
                                 </div>
                             </div>
@@ -149,6 +149,17 @@ $url = [
                                     </textarea>
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 text-right control-label">Course</label>
+                                <div class="col-sm-6">
+                                    <textarea name="form[course]" id="ckeditorCourse" rows="5" cols="80">
+                                        <?php
+                                            if(isset($infoItem['course']))
+                                                echo $infoItem['course'];
+                                        ?>
+                                    </textarea>
+                                </div>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -171,4 +182,5 @@ $url = [
 <script>
     CKEDITOR.replace('ckeditorDescription');
     CKEDITOR.replace('ckeditorSourse');
+    CKEDITOR.replace('ckeditorCourse');
 </script>

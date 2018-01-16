@@ -118,21 +118,76 @@ class UserController extends Controller
             }
         }
         //start code compute point
-        if(!empty($arrPoint) && count($arrPoint)< $allVideo[0]['allVideo'] ){
-            $this->_view->point= count($arrPoint);
+        if(!empty($arrPoint)){
+            $num=count($arrPoint);
+            $this->_view->total=$num;
+            if(!session::get('compute')){
+                session::set('compute',$num);
+            }else{
+                $compute=count($arrPoint)-session::get('compute');
+                if($compute<$allVideo[0]['allVideo']){
+                    $computePoint=  $dataUser['all_point']+$compute;
+                }
+                $this->_model->update('user',['all_point'=>$computePoint],['id'=>$idUser]);
+                session::set('compute',$num);
+                $dataUser = $this->_model->show('user', $idUser);
+            }
+
+            $this->_view->point=$dataUser['all_point'];
+        }else{
+            $this->_view->point=0;
         }
-        elseif (count($arrPoint)> $allVideo[0]['allVideo']){
-            $this->_view->point= $allVideo[0]['allVideo'];
-        }
-        else{
-            $this->_view->point= 0;
-        }
+
+
         //end code compute point
+
+        //info point convert money
+        $queryTwo="SELECT * FROM `currentMoney` ORDER BY `id` DESC ";
+        $this->_view->money=$this->_model->execute($queryTwo,true);
+        //end info
+
+        //history point convert
+        $queryHistory="SELECT * FROM `historyPoint` WHERE `id_user`=".Session::get('user')['info']['id'];
+        $this->_view->historyPoint=$this->_model->execute($queryHistory,true);
+        //end history
         $this->_view->videoViewed = $data;
         $this->_view->infoUser = $this->_model->select(DB_TBUSER, Session::get('user')['info']['id'], 1);
         $this->_view->render($this->table . "/profile");
     }
 //end profileAction-------
+
+//convert point
+public function convertPointAction(){
+    $queryTwo="SELECT * FROM `currentMoney` ORDER BY `id` DESC ";
+    $this->_view->money=$this->_model->execute($queryTwo,true);
+    if(isset($this->_arrParam['form'])) {
+            date_default_timezone_set('Asia/Ho_Chi_Minh');
+            $idUser = Session::get('user')['info']['id'];
+            $history = $this->_model->show('user', $idUser);
+            $queryOne="SELECT * FROM `historyPoint` WHERE `id_user`= ".$idUser." AND `status`= 0";
+            $historyPoint = $this->_model->execute($queryOne,true);
+            if (!empty($historyPoint)) {
+                $this->_view->errors = Helper::showErrors('Yêu cầu đổi điểm lần trước chưa được xác nhận!');
+            } else {
+                if (0 < $this->_arrParam['form']['convert'] && $this->_arrParam['form']['convert'] <= $history['all_point'] && gettype($this->_arrParam['form']['convert'] == 'integer')) {
+                    $convert = [];
+                    $convert['id_user'] = $idUser;
+                    $convert['current_point'] = $history['all_point'];
+                    $convert['point_convert'] = $this->_arrParam['form']['convert'];
+                    $convert['date_convert'] = date('Y-m-d', time());
+                    $convert['money'] = $this->_arrParam['form']['convert'] * $this->_view->money[0]['current_money'];
+                    $convert['time']=date('H:i:s', time());
+                    $convert['status'] = 0;
+                    $this->_model->insert('historyPoint', $convert);
+                    $this->_view->success=Helper::success('Vui lòng chờ quản trị viên xác nhận!');
+                }else{
+                    $this->_view->errors = Helper::showErrors('Số điểm phải nhỏ hơn hoặc bằng số điểm hiện tại!');
+                }
+            }
+        }
+
+        $this->_view->render('user/convertPoint');
+}
 
 //check password in section profile ajax
     public
@@ -181,7 +236,9 @@ class UserController extends Controller
     function logoutAction()
     {
         Session::delete('user');
+        Session::delete('compute');
         URL::redirect('default', 'index', 'index', null, "trang-chu.html");
+
     }
 
 //forget password

@@ -1,5 +1,6 @@
 <?php
 $listCourse = empty($this->listCourse) ? [] : $this->listCourse;
+
 $url = array(
     'add' => URL::createLink('admin', DB_TBCOURSE, 'add'),
     'edit' => URL::createLink('admin', DB_TBCOURSE, 'edit'),
@@ -68,6 +69,7 @@ $url = array(
                                                 <th>Tag</th>
                                                 <th>Author</th>
                                                 <th>Status</th>
+                                                <th>Course</th>
                                                 <th>Sourse</th>
                                             </tr>
                                             </thead>
@@ -111,6 +113,7 @@ $url = array(
                                                         echo '<i onclick="javascript:ajaxStatus(\'' . $onclick . '\')" id="status-' . $value['id'] . '">' . ($value['status'] ? 'on' : 'off') . '</i>';
                                                         ?>
                                                     </td>
+                                                    <td><?php echo $value['course'] ?></td>
                                                     <td><?php echo $value['sourse'] ?></td>
                                                 </tr>
                                             <?php } ?>

@@ -19,6 +19,7 @@ class IndexController extends Controller
         $this->_view->listFindCourse = $this->_model->getIDNameCategory();
         $this->_view->statistics = $this->_model->getStatistics();
         $this->_view->render('index/index');
+
     }
 
     public function findAction()
@@ -76,7 +77,7 @@ class IndexController extends Controller
         }
         if (isset($this->_arrParam['form'])) {
             $validate = new Validate($this->_arrParam['form']);
-            $queryUserName = "SELECT id,username,fullname,email FROM `user` WHERE email = '" . $this->_arrParam['form']['email'] . "' AND password='" . md5($this->_arrParam['form']['password']) . "' AND status=1";
+            $queryUserName = "SELECT id,username,fullname,email,point FROM `user` WHERE email = '" . $this->_arrParam['form']['email'] . "' AND password='" . md5($this->_arrParam['form']['password']) . "' AND status=1";
             $validate->addRule('email', 'existRecord', array('database' => $this->_model, 'query' => $queryUserName, 'min' => 3, 'max' => 25))
                 ->addRule('password', 'password');
             $validate->run();
@@ -84,11 +85,17 @@ class IndexController extends Controller
             if ($validate->isValid() == false) {
                 $this->_view->errors = "Invalid username or password.";
             } else {
-                if (isset($this->_arrParam['form']['check']))
+                if (isset($this->_arrParam['form']['check'])) {
                     Session::set('user', ['login' => true, 'info' => $this->_model->execute($queryUserName, true)[0], 'time' => time() + 24 * 60 * 60]);
-                else
+                    $arrPoint=(unserialize(Session::get('user')['info']['point']));
+                    Session::set('compute',count($arrPoint));
+                }
+                else {
                     Session::set('user', ['login' => true, 'info' => $this->_model->execute($queryUserName, true)[0], 'time' => time()]);
-                URL::redirect('default', 'index', 'index', null, 'trang-chu.html');
+                    $arrPoint=(unserialize(Session::get('user')['info']['point']));
+                    Session::set('compute',count($arrPoint));
+                    URL::redirect('default', 'index', 'index', null, 'trang-chu.html');
+                }
             }
         }
         $this->_view->render($this->table . "/login");

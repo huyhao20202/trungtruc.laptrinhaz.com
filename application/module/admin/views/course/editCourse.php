@@ -83,7 +83,7 @@ $listTag = $this->listTag;
                                         <input type="file" class="form-control" onchange="readURL(this);" name="image">
                                         <span class="help-block"><i style="color: red"> *</i>Select a new one if you want to change image</span>
                                         <div class="blah">
-                                            <img id="blah" src="#" height="50px"/>
+                                            <img id="blah" src="" height="50px"/>
                                         </div>
                                     </div>
                                 </div>
@@ -100,7 +100,7 @@ $listTag = $this->listTag;
                                         <input type="file" class="form-control" onchange="readURL(this);" name="imageThumbnail">
                                         <span class="help-block"><i style="color: red"> *</i>Select a new one if you want to change image</span>
                                         <div class="blah">
-                                            <img id="blah" src="#" height="50px"/>
+                                            <img id="blah" src="" height="50px"/>
                                         </div>
                                     </div>
                                 </div>
@@ -151,6 +151,18 @@ $listTag = $this->listTag;
                                     </textarea>
                                     </div>
                                 </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3 text-right control-label">Course</label>
+                                    <div class="col-sm-6">
+                                    <textarea name="form[course]" id="ckeditorCourse" rows="5" cols="80">
+                                        <?php
+                                            if(isset($infoItem['course']))
+                                                echo $infoItem['course'];
+
+                                        ?>
+                                    </textarea>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </form>
@@ -174,4 +186,5 @@ $listTag = $this->listTag;
 <script>
     CKEDITOR.replace('ckeditorDescription');
     CKEDITOR.replace('ckeditorSourse');
+    CKEDITOR.replace('ckeditorCourse');
 </script>

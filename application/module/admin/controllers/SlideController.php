@@ -28,13 +28,18 @@ class SlideController extends Controller
                 $queryTile = "SELECT * FROM `" . DB_TBSLIDE . "` WHERE `title`= '" . $this->_arrParam['form']['title'] . "'";
                 $queryContent = "SELECT * FROM `" . DB_TBSLIDE . "` WHERE `content`= '" . $this->_arrParam['form']['content'] . "'";
                 $this->_arrParam['form']['picture'] = $_FILES['picture'];
+                settype($this->_arrParam['form']['status'],"integer");
                 $validate = new Validate($this->_arrParam['form']);
 
                 $validate->addRule('picture', 'file', ['min' => 1000, 'max' => 2097152, 'extension' => ['jpg', 'png', 'jpeg']], false)
                     ->addRule('title', 'string-notExistRecord', ['min' => 1, 'max' => 200, 'database' => $this->_model, 'query' => $queryTile])
                     ->addRule('content', 'string-notExistRecord', ['min' => 1, 'max' => 1000, 'database' => $this->_model, 'query' => $queryContent])
-                    ->addRule('ordering', 'int', ['min' => 1, 'max' => '20']);
+                    ->addRule('ordering', 'int', ['min' => 1, 'max' => 20]);
+
                 $validate->run();
+                if($this->_arrParam['form']['status'] != 1 && $this->_arrParam['form']['status'] != 0 ){
+                     $validate->setError('status','không hợp lệ!');
+                 }
                 $this->_arrParam['form'] = $validate->getResult();
                 $this->_view->infoItem = $this->_arrParam['form'];
                 if ($validate->isValid() == false) {
@@ -75,6 +80,9 @@ class SlideController extends Controller
                 ->addRule('content', 'string', ['min' => 1, 'max' => 1000])
                 ->addRule('ordering', 'int', ['min' => 1, 'max' => '20']);
             $validate->run();
+            if($this->_arrParam['form']['status'] != 1 && $this->_arrParam['form']['status'] != 0 ){
+                $validate->setError('status','không hợp lệ!');
+            }
             $this->_arrParam['form'] = $validate->getResult();
             $this->_view->infoItem = $this->_arrParam['form'];
             if ($validate->isValid() == false) {
@@ -96,12 +104,6 @@ class SlideController extends Controller
                     $this->_view->infoItem = [];
                 }
             }
-
-//            else{
-//                $this->_view->infoItem=$this->_arrParam['form'];
-//                $this->_view->errors=Helper::showErrors('Chưa chọn slide!');
-//            }
-
         }
 
         $this->_view->render($this->table . '/edit');
@@ -124,8 +126,15 @@ class SlideController extends Controller
     //delete slide
     public function deleteAction()
     {
-        if (!empty($this->_arrParam['cid'])) {
-
+        $arrCid=$this->_arrParam['cid'];
+        if (!empty($arrCid)) {
+            foreach ($arrCid as $value){
+                $query="SELECT `picture` FROM `slide` WHERE `id`=".$value;
+                $picture=TEMPLATE_PATH."/default/main/images/homeslider/".$this->_model->execute($query,true)[0]['picture'];
+                if(file_exists($picture)){
+                    unlink($picture);
+                }
+            }
             $this->_model->delete($this->table, $this->_arrParam['cid']);
         }
         URL::redirect('admin', $this->table, 'index');

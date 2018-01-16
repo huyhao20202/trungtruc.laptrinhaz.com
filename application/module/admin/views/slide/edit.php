@@ -32,11 +32,6 @@ $url = [
         >
             <i class="fa fa-save"></i> Save & Close
         </a>
-        <a class="btn btn-app"
-           onclick="javascript:submitForm('<?php echo $url['save-new'] ?>')"
-        >
-            <i class="fa fa-plus-square"></i> Save & New
-        </a>
         <a href="<?php echo $url['cancel'] ?>" class="btn btn-app">
             <i class="fa  fa-arrow-circle-left"></i> Cancel
         </a>
@@ -78,6 +73,13 @@ $url = [
                                     <input type="number" class="form-control"  name="form[ordering]" min="1"
                                            value="<?php if (isset($infoItemEdit['ordering'])) echo $infoItemEdit['ordering'] ?>"
                                     >
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 text-right control-label">Status<i style="color: red"> *</i></label>
+                                <div class="col-sm-3">
+                                    <input type="radio" name="form[status]" value="1" <?php if (isset($infoItemEdit['status']) && $infoItemEdit['status'] == 1){ echo "checked";}?> >On
+                                    <input type="radio" name="form[status]" value="0" <?php if (isset($infoItemEdit['status']) && $infoItemEdit['status'] == 0){ echo "checked";}?>>Off
                                 </div>
                             </div>
                             <div class="form-group row">

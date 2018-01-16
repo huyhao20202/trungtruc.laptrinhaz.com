@@ -87,11 +87,13 @@ class CourseController extends Controller
                 $strArrPoint=serialize($arrPoint);
                 $query="UPDATE `user` SET `point`='".$strArrPoint."' WHERE id=$idUser";
                 $this->_model->execute($query);
+                echo "yes";
 
             }else{
                 $arrPoint=unserialize($dataUser['point']);
                 if(!in_array($point,$arrPoint)){
                     $arrPoint[]=$point;
+                    echo "yes";
                 }
                 $strArrPoint=serialize($arrPoint);
                 $query="UPDATE `user` SET `point`='".$strArrPoint."' WHERE id=$idUser";

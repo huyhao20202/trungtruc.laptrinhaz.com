@@ -39,7 +39,6 @@ class Model
         $newSet = $this->createUpdateSQL($data);
         $newWhere = $this->createUpdateSQL($where);
         $query = "UPDATE `$table` SET " . $newSet . " WHERE $newWhere";
-
         $this->execute($query);
     }
 
@@ -73,9 +72,11 @@ class Model
     // SHOW ALL
     public function showAll($table)
     {
+
         $stmt = $this->conn->prepare("SELECT * FROM `$table` ORDER BY `name`");
         $stmt->execute();
         return $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
     }
 
     // SHOW

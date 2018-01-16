@@ -1,8 +1,11 @@
 <?php
+$total=$this->total;
+$money=$this->money;
 $infoUser = $this->infoUser;
+$history=$this->historyPoint;
 $videoViewed=$this->videoViewed;
 $point=$this->point;
-
+$url=["convert"=>URL::createLink('default','user','convertPoint',null,'convert-point.html')];
 ?>
 
 <section class="profile-feature">
@@ -32,6 +35,12 @@ $point=$this->point;
                 <a href="" class="assignment">
                     <i class="fa fa-area-chart" aria-hidden="true"></i>
                     &nbsp;Statistical
+                </a>
+            </li>
+            <li>
+                <a href="" class="history">
+                    <i class="fa fa-history" aria-hidden="true"></i>
+                    &nbsp;History
                 </a>
             </li>
 
@@ -182,11 +191,30 @@ $point=$this->point;
     <div class="container assignment hidden">
 
         <div class="table-asignment">
+            <div class="row">
+                <div class="col-md-4 box-point">
+                    <ul class="nav-tabsOne" role="tablist">
+                        <li class="point active"><a href="#" role="tab" data-toggle="tab">
+                                Tổng điểm<br/> <?php echo $total?> <i class="fa fa-star" aria-hidden="true"></i> </a></li>
 
-            <ul class="nav-tabsOne" role="tablist">
-                <li class="point active"><a href="#" role="tab" data-toggle="tab">
-                        My point: <?php echo $point?> <i class="fa fa-star" aria-hidden="true"></i> </a></li>
-            </ul>
+                    </ul>
+                </div>
+                <div class="col-md-4 box-point">
+                    <ul class="nav-tabsOne" role="tablist">
+                        <li class="point active"><a href="#" role="tab" data-toggle="tab">
+                                Điểm hiện tại<br/> <?php echo $point?> <i class="fa fa-star" aria-hidden="true"></i> </a></li>
+
+                    </ul>
+                </div>
+                <div class="col-md-4 box-point">
+                    <ul class="nav-tabsOne" role="tablist">
+                        <li class="point active"><a href="#" role="tab" data-toggle="tab">
+                             Giá trị điểm<br/> <?php echo 1?> <i class="fa fa-star" aria-hidden="true"></i>  <?php echo "= ".number_format($money[0]['current_money'],0,'.','.')." VNĐ";?> </a></li>
+
+                    </ul>
+                </div>
+            </div>
+             <a class="convert-point" target="_blank" href="<?php echo $url['convert'];?>">Đổi điểm</a>
             <ul class="nav-tabs" role="tablist">
                 <li class="statistical" ><a href="#" role="tab" data-toggle="tab">My statistical</a></li>
 
@@ -253,11 +281,92 @@ $point=$this->point;
             </div>
         </div>
     </div>
+ <div class="container history hidden">
+     <ul class="nav-tabs" role="tablist">
+         <li class="statistical" ><a href="#" role="tab" data-toggle="tab">My History</a></li>
 
+     </ul>
+
+         <!-- Main content -->
+         <section class="content">
+             <div class="row">
+                 <div class="col-xs-12">
+                     <div class="box">
+                         <!-- /.box-header -->
+                             <div class="box-body">
+                                 <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                                     <div class="row">
+                                         <div class="col-sm-12">
+                                             <table id="example1" class="table table-bordered table-striped dataTable"
+                                                    role="grid" aria-describedby="example1_info">
+                                                 <thead>
+                                                 <tr role="row">
+                                                     <th>Current Point</th>
+                                                     <th>Point convert</th>
+                                                     <th>Money</th>
+                                                     <th>date</th>
+                                                     <th>time</th>
+                                                     <th>status</th>
+                                                 </tr>
+                                                 </thead>
+                                                 <tbody>
+                                                 <?php
+                                                 foreach ($history as $key => $value) { ?>
+                                                     <tr role="row" class="odd">
+                                                         <td><?php echo $value['current_point'] ?></td>
+                                                         <td><?php echo $value['point_convert'] ?></td>
+                                                         <td><?php echo number_format($value['money'],0,'.','.')." VNĐ" ?></td>
+                                                         <td><?php echo $value['date_convert'] ?></td>
+                                                         <td><?php echo $value['time'] ?></td>
+                                                         <td ><?php if($value['status']==0)
+                                                                 echo "Processing ...";
+                                                             else
+                                                                 echo "Completed";
+                                                             ?></td>
+
+                                                     </tr>
+
+                                                     <?php
+                                                 } ?>
+                                                 </tbody>
+                                             </table>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+                         <!-- /.box-body -->
+                     </div>
+                     <!--            </form>-->
+                     <!-- /.box -->
+                 </div>
+                 <!-- /.col -->
+             </div>
+             <!-- /.row -->
+         </section>
+
+         <!-- /.content -->
+
+ </div>
 
 </section>
 <!-- END / PROFILE -->
 <script>
+
+</script>
+<script>
+    //script table admin
+    $(function () {
+        $('#example1').DataTable()
+        $('#example2').DataTable({
+            'paging': true,
+            'lengthChange': false,
+            'searching': false,
+            'ordering': true,
+            'info': true,
+            'autoWidth': false
+        })
+    })
+    //end table admin
     var email = "<?php echo $infoUser['email'] ?>";
     var password = 0;
     var passwordConfirm = 0;

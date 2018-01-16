@@ -27,6 +27,7 @@ class CourseController extends Controller
             if (strlen($this->_arrParam['form']['link']) > 40) {
                 $this->_arrParam['form']['link'] = Helper::cutCharacter($this->_arrParam['form']['link'], 'list=', 5);
             }
+
             $validate = new Validate($this->_arrParam['form']);
 
             $queryName = "SELECT * FROM `" . $this->table . "` WHERE `name`='" . $this->_arrParam['form']['name'] . "'";

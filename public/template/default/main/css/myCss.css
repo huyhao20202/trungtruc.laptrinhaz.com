@@ -2,6 +2,61 @@
     margin: 0px;
     padding: 0px;
 }
+/*css table adminlte*/
+table.dataTable thead .sorting:after{
+    content: "\f07d" !important;
+    font-family: FontAwesome;
+}
+table.dataTable thead .sorting_asc:after {
+    content: "\f160" !important;
+    font-family: FontAwesome;
+}
+table.dataTable thead .sorting_desc:after {
+    content: "\f161" !important;
+    font-family: FontAwesome;
+}
+a.paginate_button.current {
+    background: #3498db;
+    border-radius: 3px;
+    padding: 5px;
+    padding-right: 10px;
+    padding-left: 10px;
+    cursor: pointer;
+}
+a.paginate_button {
+    border-radius: 3px;
+    padding: 5px;
+    padding-right: 10px;
+    padding-left: 10px;
+    cursor: pointer;
+    border: 1px solid;
+}
+
+a#example1_previous {
+    border-radius: 6px;
+    background: #3498db;
+    padding: 8px;
+    color: white;
+}
+a#example1_next {
+    border-radius: 6px;
+    background: #3498db;
+    padding: 8px;
+    color: white;
+}
+/*end adminlte*/
+a.convert-point {
+    display: block;
+    width: 32%;
+    margin: auto;
+    background: #3498db;
+    color: white;
+    text-align: center;
+    padding: 5px;
+    margin-top: 36px;
+    font-size: 18px;
+    font-weight: 700;
+}
 
 
 
@@ -19,20 +74,20 @@ input#exampleInputEmail2 {
 }
 
 .carousel-caption {
-    height: 100%;
+    height: 107%;
 }
 
 .carousel-caption p {
-    font-size: 3rem;
-    color: #000000;
-    background-color: #ffffff8a;
+    font-size: 2rem;
+    color: #0e0909;
+    background-color: #e86d6d4a;
 }
 
 .carousel-caption h2 {
-    font-size: 5rem;
-    margin-top: 15%;
+    font-size: 3rem;
+    margin-top: 8%;
     padding: 5px 0;
-    background-color: #000000a3;
+    background-color: #3a30f361;
 }
 
 .price {
@@ -304,6 +359,12 @@ label.custom-button-file {
 }
 input#file-avatar {
     display: none;
+}
+.pr-course{
+    font-family: 'Lato', sans-serif;
+    font-size: 24px;
+    line-height: 1.5em;
+    color: #7c6666;
 }
 /*point of profile*/
 li.active.point {

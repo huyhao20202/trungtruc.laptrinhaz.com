@@ -74,7 +74,11 @@ $url = [
                                                 <tr role="row" class="odd">
                                                     <td><input type="checkbox" name="cid[]"
                                                                value="<?php echo $value['id'] ?>"></td>
-                                                    <td><img src="<?php echo TEMPLATE_URL.'/default/main/images/homeslider/'.$value['picture']?>" alt="" style="width: 200px;height: 100px;"></td>
+                                                    <td><a href="#"
+                                                           onclick="submitForm('<?php echo $url['edit'] . "&id=" . $value['id'] ?>')"
+                                                        ><img src="<?php echo TEMPLATE_URL . '/default/main/images/homeslider/' . $value['picture'] ?>"
+                                                              alt="" style="width: 200px;height: 100px;">
+                                                        </a></td>
                                                     <td>
                                                         <a href="#"
                                                            onclick="submitForm('<?php echo $url['edit'] . "&id=" . $value['id'] ?>')"
@@ -85,7 +89,7 @@ $url = [
                                                     <td class="text-center status">
                                                         <?php
                                                         $onclick = URL::createLink('admin', DB_TBSLIDE, 'ajaxStatus', ['id' => $value['id'], 'status' => $value['status']]);
-                                                        echo '<i aria-hidden="true" onclick="javascript:ajaxStatus(\'' . $onclick . '\')" id="status-' . $value['id'] . '" class="fa '.($value['status'] ? 'fa-toggle-on' : 'fa-toggle-off').'"> </i>';
+                                                        echo '<i aria-hidden="true" onclick="javascript:ajaxStatus(\'' . $onclick . '\')" id="status-' . $value['id'] . '" class="fa ' . ($value['status'] ? 'fa-toggle-on' : 'fa-toggle-off') . '"> </i>';
                                                         ?>
                                                     </td>
                                                     <td><?php echo $value['ordering'] ?></td>

@@ -35,7 +35,7 @@ class CourseModel extends Model
 
     public function getImageCourse($id_course)
     {
-        $query[] = "SELECT imageThumbnail, name, description, sourse";
+        $query[] = "SELECT imageThumbnail, name, description, sourse,course";
         $query[] = "FROM `" . DB_TBCOURSE . "`";
         $query[] = "WHERE id=$id_course";
         $query = implode(" ", $query);
