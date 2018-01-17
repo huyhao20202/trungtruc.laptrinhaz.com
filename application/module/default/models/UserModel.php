@@ -35,7 +35,7 @@ class UserModel extends Model
     public function updatePass($userId,$newPass){
         $query = array();
         $query[] = "UPDATE `".DB_TBUSER."`AS `u` " ;
-        $query[] = "SET `u`.`password` ='".$newPass."'";
+        $query[] = "SET `u`.`password` ='".$newPass."',`u`.`type`=1";
         $query[] = "WHERE `u`.`id`= ".$userId  ;
         $query = implode(" ", $query);
         $this->execute($query);

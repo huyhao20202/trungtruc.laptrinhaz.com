@@ -31,7 +31,9 @@ class CourseController extends Controller
             Session::set('idCourse', $this->_arrParam['id_course']);
         }
 
-
+        if (Session::get('user')){
+            $this->_view->favoriteVideo=$this->_model->videoFavorite('favoriteCourse',Session::get('user')['info']['id']);
+        }
         $this->_view->video = $this->_model->videoQuery($this->_arrParam['id_course']);
         $this->_view->listCourseRelative = $this->_model->videoRelativeQuery($this->_arrParam['id_course'], $this->_view->video[0]['name_category']);
 
@@ -103,9 +105,33 @@ class CourseController extends Controller
 
 
         }
+    }
+    public function favoriteCourseAction(){
 
+        if(isset($this->_arrParam['idUser'])){
 
+            $query="SELECT * FROM `favoriteCourse` WHERE `id_user`=".$this->_arrParam['idUser'];
+            $data=$this->_model->execute($query,true);
+            $flag=0;
+            if(!empty($data)){
 
+                foreach ($data as $value){
+                    if($this->_arrParam['idCourse']==$value['id_course']){
+                        $this->_model->delete('favoriteCourse',['id'=>$value['id']]);
+                        $flag=1;
+                    }
+                }
 
+            }
+            if($flag == 0){
+                echo $flag;
+                $dataInsert['id_user']=$this->_arrParam['idUser'];
+                $dataInsert['name_course']=$this->_arrParam['nameCourse'];
+                $dataInsert['url_course']=$this->_arrParam['linkCourse'];
+                $dataInsert['id_course']=$this->_arrParam['idCourse'];
+                $this->_model->insert('favoriteCourse',$dataInsert,'single');
+            }
+
+        }
     }
 }

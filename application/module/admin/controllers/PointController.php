@@ -73,10 +73,11 @@ class PointController extends Controller
     public function statusConvertAction(){
         if($this->_arrParam['id']){
             //compute point after convert point
-            $data=$this->_model->show('historyPoint',$this->_arrParam['id']);
-            $result=$data['current_point'] - $data['point_convert'];
+            $dataHistory=$this->_model->show('historyPoint',$this->_arrParam['id']);
+            $dataUser=$this->_model->show('user',$dataHistory['id_user']);
+            $result=$dataUser['all_point'] - $dataHistory['point_convert'];
             $this->_model->update('historyPoint',["status"=>1],["id"=>$this->_arrParam['id']]);
-            $this->_model->update('user',["all_point"=>$result],["id"=>$data['id_user']]);
+            $this->_model->update('user',["all_point"=>$result],["id"=>$dataHistory['id_user']]);
             echo "Completed";
         }
     }

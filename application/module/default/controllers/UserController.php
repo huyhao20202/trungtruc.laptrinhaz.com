@@ -121,25 +121,24 @@ class UserController extends Controller
         if(!empty($arrPoint)){
             $num=count($arrPoint);
             $this->_view->total=$num;
-            if(!session::get('compute')){
-                session::set('compute',$num);
-            }else{
-                $compute=count($arrPoint)-session::get('compute');
+                $compute=$num-Session::get('compute');
                 if($compute<$allVideo[0]['allVideo']){
                     $computePoint=  $dataUser['all_point']+$compute;
                 }
                 $this->_model->update('user',['all_point'=>$computePoint],['id'=>$idUser]);
-                session::set('compute',$num);
+                Session::set('compute',$num);
                 $dataUser = $this->_model->show('user', $idUser);
-            }
-
             $this->_view->point=$dataUser['all_point'];
         }else{
             $this->_view->point=0;
+            $this->_view->total=0;
         }
-
-
         //end code compute point
+
+        //list favorite course
+        $queryFavorite="SELECT * FROM `favoriteCourse` WHERE `id_user`=".Session::get('user')['info']['id'];
+        $this->_view->listFavorite=$this->_model->execute($queryFavorite,true);
+        //end list favorite course
 
         //info point convert money
         $queryTwo="SELECT * FROM `currentMoney` ORDER BY `id` DESC ";

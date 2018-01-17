@@ -14,9 +14,10 @@ $url = [
             <!-- FORM -->
             <div class="col-lg-4 pull-right">
                 <div class="form-login">
+
                     <form action="<?php echo $url['register'] ?>" method="post">
                         <h2 class="text-uppercase">sign up</h2>
-
+                        <?php echo  $this->errors;?>
                         <div class="form-email">
                             <input type="email" placeholder="Email (*)" name="form[email]" autofocus required>
                             <div class="email" style="color: #fff"></div>

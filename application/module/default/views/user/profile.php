@@ -5,6 +5,7 @@ $infoUser = $this->infoUser;
 $history=$this->historyPoint;
 $videoViewed=$this->videoViewed;
 $point=$this->point;
+$listFavorite=$this->listFavorite;
 $url=["convert"=>URL::createLink('default','user','convertPoint',null,'convert-point.html')];
 ?>
 
@@ -15,7 +16,7 @@ $url=["convert"=>URL::createLink('default','user','convertPoint',null,'convert-p
         <div class="info-author">
 
             <div>
-                <h2 class="text-center" style="color: #fff">Profile</h2>
+                <h2 class="text-center" style="color: #fff">Thông tin</h2>
             </div>
         </div>
     </div>
@@ -28,19 +29,25 @@ $url=["convert"=>URL::createLink('default','user','convertPoint',null,'convert-p
             <li class="current">
                 <a href="" class="user">
                     <i class="icon md-user-minus"></i>
-                    &nbsp;Profile
+                    &nbsp;Thông tin
                 </a>
             </li>
             <li>
                 <a href="" class="assignment">
                     <i class="fa fa-area-chart" aria-hidden="true"></i>
-                    &nbsp;Statistical
+                    &nbsp;Thống kê
                 </a>
             </li>
             <li>
                 <a href="" class="history">
                     <i class="fa fa-history" aria-hidden="true"></i>
-                    &nbsp;History
+                    &nbsp;Lịch sử
+                </a>
+            </li>
+            <li>
+                <a href="" class="favorite">
+                    <i class="fa fa-heart" aria-hidden="true"></i>
+                    &nbsp;Yêu thích
                 </a>
             </li>
 
@@ -51,8 +58,10 @@ $url=["convert"=>URL::createLink('default','user','convertPoint',null,'convert-p
 
 <!-- PROFILE -->
 <section class="profile">
+<!--    // thông tin-->
+
     <div class="container user">
-        <h3 class="md black">Profile</h3>
+        <h3 class="md black">Thông tin</h3>
         <div class="row">
             <div class="col-md-12">
                 <?php
@@ -102,7 +111,7 @@ $url=["convert"=>URL::createLink('default','user','convertPoint',null,'convert-p
         <div class="row">
             <div class="col-md-12">
                 <div class="changeInfo" style="display: none" >
-                    <h3 class="md black">Change Info</h3>
+                    <h3 class="md black">Thay đổi thông tin</h3>
                     <div class="row">
                         <div class="col-md-12">
                             <!--                --><?php //if (isset($this->success)) echo $this->success ?>
@@ -155,7 +164,7 @@ $url=["convert"=>URL::createLink('default','user','convertPoint',null,'convert-p
                     </div>
                 </div>
                 <div class="changePass">
-                <h3 class="md black">Change password</h3>
+                <h3 class="md black">Thay đổi mật khẩu</h3>
                 <div class="row">
                     <div class="col-md-12">
                         <form action="" method="post">
@@ -187,6 +196,7 @@ $url=["convert"=>URL::createLink('default','user','convertPoint',null,'convert-p
 
     </div>
 
+<!--//thống kê-->
 
     <div class="container assignment hidden">
 
@@ -216,7 +226,7 @@ $url=["convert"=>URL::createLink('default','user','convertPoint',null,'convert-p
             </div>
              <a class="convert-point" target="_blank" href="<?php echo $url['convert'];?>">Đổi điểm</a>
             <ul class="nav-tabs" role="tablist">
-                <li class="statistical" ><a href="#" role="tab" data-toggle="tab">My statistical</a></li>
+                <li class="statistical" ><a href="#" role="tab" data-toggle="tab">Video đã xem</a></li>
 
             </ul>
 
@@ -281,9 +291,10 @@ $url=["convert"=>URL::createLink('default','user','convertPoint',null,'convert-p
             </div>
         </div>
     </div>
+<!--    lịch sử -->
  <div class="container history hidden">
      <ul class="nav-tabs" role="tablist">
-         <li class="statistical" ><a href="#" role="tab" data-toggle="tab">My History</a></li>
+         <li class="statistical" ><a href="#" role="tab" data-toggle="tab">Lịch sử đổi điểm</a></li>
 
      </ul>
 
@@ -301,12 +312,12 @@ $url=["convert"=>URL::createLink('default','user','convertPoint',null,'convert-p
                                                     role="grid" aria-describedby="example1_info">
                                                  <thead>
                                                  <tr role="row">
-                                                     <th>Current Point</th>
-                                                     <th>Point convert</th>
-                                                     <th>Money</th>
-                                                     <th>date</th>
-                                                     <th>time</th>
-                                                     <th>status</th>
+                                                     <th>Điểm hiện tại</th>
+                                                     <th>Đổi</th>
+                                                     <th>Số tiền</th>
+                                                     <th>Ngày đổi</th>
+                                                     <th>Thời gian đổi</th>
+                                                     <th>Trạng thái</th>
                                                  </tr>
                                                  </thead>
                                                  <tbody>
@@ -319,9 +330,9 @@ $url=["convert"=>URL::createLink('default','user','convertPoint',null,'convert-p
                                                          <td><?php echo $value['date_convert'] ?></td>
                                                          <td><?php echo $value['time'] ?></td>
                                                          <td ><?php if($value['status']==0)
-                                                                 echo "Processing ...";
+                                                                 echo "Chờ duyệt ...";
                                                              else
-                                                                 echo "Completed";
+                                                                 echo "Đã duyệt";
                                                              ?></td>
 
                                                      </tr>
@@ -347,13 +358,61 @@ $url=["convert"=>URL::createLink('default','user','convertPoint',null,'convert-p
          <!-- /.content -->
 
  </div>
+<!--    yêu thích-->
+    <div class="container favorite hidden">
+        <div class="table-asignment">
+            <ul class="nav-tabs" role="tablist">
+                <li class="statistical" ><a href="#" role="tab" data-toggle="tab">Khóa học yêu thích</a></li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <!-- MY SUBMISSIONS -->
+                <div class="tab-pane fade in active" id="mysubmissions">
+                    <div class="table-wrap">
+                        <!-- TABLE HEAD -->
+                        <div class="table-head">
+                            <div class="submissions"></div>
+                            <div class="tb-icon"></div>
+                        </div>
+                        <!-- END / TABLE HEAD -->
+
+                        <!-- TABLE BODY -->
+                        <div class="table-body">
+
+
+                            <!-- TABLE ITEM -->
+                                <div class="table-item new">
+                                    <div class="tbody">
+                                        <!-- ITEM -->
+                                        <?php foreach ($listFavorite as $value){?>
+                                            <div class="item list-favorite">
+                                                <div class="submissions item-favorite"><i class="fa fa-check-circle-o" aria-hidden="true"></i>  <a target="_blank" href="<?php echo $value['url_course'];?>"><?php echo $value['name_course']?></a></div>
+
+                                            </div>
+                                        <?php }?>
+                                        <!-- END / ITEM -->
+                                    </div>
+                                </div>
+
+                            <!-- END / TABLE ITEM -->
+
+
+                        </div>
+                        <!-- END / TABLE BODY -->
+                    </div>
+
+                </div>
+                <!-- END / MY SUBMISSIONS -->
+
+            </div>
+        </div>
+    </div>
 
 </section>
 <!-- END / PROFILE -->
 <script>
 
-</script>
-<script>
     //script table admin
     $(function () {
         $('#example1').DataTable()
@@ -367,6 +426,7 @@ $url=["convert"=>URL::createLink('default','user','convertPoint',null,'convert-p
         })
     })
     //end table admin
+
     var email = "<?php echo $infoUser['email'] ?>";
     var password = 0;
     var passwordConfirm = 0;

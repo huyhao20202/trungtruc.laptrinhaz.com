@@ -2,6 +2,19 @@
     margin: 0px;
     padding: 0px;
 }
+/*css section favorite*/
+.item.list-favorite {
+    background: white !important;
+    padding: 7px !important;
+    margin-top: 4px;
+}
+.submissions.item-favorite {
+    color: #37abf2;
+    font-size: 1.7rem;
+    font-weight: bold;
+}
+/*end css section favorite*/
+
 /*css table adminlte*/
 table.dataTable thead .sorting:after{
     content: "\f07d" !important;
@@ -386,4 +399,16 @@ li.active.point {
     font-family: 'Lato', sans-serif;
     border-bottom: 1px solid #ddd;
 
+}
+i.fa.fa-heart-o {
+    color: #37abf2;
+    cursor: pointer;
+}
+
+i.fa.fa-heart {
+    color: #37abf2;
+    cursor: pointer;
+}
+li.favorite-course {
+    cursor: pointer;
 }

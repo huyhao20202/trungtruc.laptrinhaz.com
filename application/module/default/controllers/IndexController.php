@@ -76,8 +76,17 @@ class IndexController extends Controller
             URL::redirect('admin', 'index', 'index');
         }
         if (isset($this->_arrParam['form'])) {
+            //xét là tài khoản trên zendvn hay mới đăng ký
+            $queryData="SELECT * FROM `user` WHERE `email` = '".$this->_arrParam['form']['email']."'";
+            $dataUser=$this->_model->execute($queryData,true);
+            if($dataUser[0]['type']==0){
+                $passUser=$this->_arrParam['form']['password'].$dataUser[0]['created'].$dataUser[0]['username'];
+            }else{
+                $passUser=$this->_arrParam['form']['password'];
+            }
+            //end
             $validate = new Validate($this->_arrParam['form']);
-            $queryUserName = "SELECT id,username,fullname,email,point FROM `user` WHERE email = '" . $this->_arrParam['form']['email'] . "' AND password='" . md5($this->_arrParam['form']['password']) . "' AND status=1";
+            $queryUserName = "SELECT id,username,fullname,email,point FROM `user` WHERE email = '" . $this->_arrParam['form']['email'] . "' AND password='" . md5($passUser) . "' AND status=1";
             $validate->addRule('email', 'existRecord', array('database' => $this->_model, 'query' => $queryUserName, 'min' => 3, 'max' => 25))
                 ->addRule('password', 'password');
             $validate->run();
@@ -88,12 +97,20 @@ class IndexController extends Controller
                 if (isset($this->_arrParam['form']['check'])) {
                     Session::set('user', ['login' => true, 'info' => $this->_model->execute($queryUserName, true)[0], 'time' => time() + 24 * 60 * 60]);
                     $arrPoint=(unserialize(Session::get('user')['info']['point']));
-                    Session::set('compute',count($arrPoint));
+                    if(!empty($arrPoint)) {
+                        Session::set('compute', count($arrPoint));
+                    }else{
+                        Session::set('compute', 0);
+                    }
                 }
                 else {
                     Session::set('user', ['login' => true, 'info' => $this->_model->execute($queryUserName, true)[0], 'time' => time()]);
                     $arrPoint=(unserialize(Session::get('user')['info']['point']));
-                    Session::set('compute',count($arrPoint));
+                    if(!empty($arrPoint)) {
+                        Session::set('compute', count($arrPoint));
+                    }else{
+                        Session::set('compute', 0);
+                    }
                     URL::redirect('default', 'index', 'index', null, 'trang-chu.html');
                 }
             }
@@ -125,17 +142,29 @@ class IndexController extends Controller
             $response = json_decode($response);
 
                 if (isset($this->_arrParam['form'])) {
+                    date_default_timezone_set('Asia/Ho_Chi_Minh');
                     if ($response->success) {
                     unset($this->_arrParam['form']['confirmPassword']);
                     unset($this->_arrParam['form']['token']);
                     $this->_arrParam['form']['password'] = md5($this->_arrParam['form']['password']);
                     $this->_arrParam['form']['active_code']=time();
-                    $this->_arrParam['form']['created']=date('Y-m-d H:i:s');
-                    $this->_model->insert(DB_TBUSER, $this->_arrParam['form']);
-                    $toMail = $this->_arrParam['form']['email'];
-                    $activeCode=$this->_arrParam['form']['active_code'];
-                    URL::redirect('default', 'user', 'becomeMember',null,"becomeMember-$toMail-$activeCode.html");
-                }
+                    $this->_arrParam['form']['created']=date('Y-m-d H:i:s',time());
+                    $query="SELECT * FROM `user` WHERE `email` = '".$this->_arrParam['form']['email']."'";
+                    $validate=new Validate($this->_arrParam['form']);
+                    $validate->addRule('email','email-notExistRecord',['database'=>$this->_model,'query'=>$query]);
+                    $validate->run();
+                        $this->_arrParam['form']=$validate->getResult();
+
+                        if($validate->isValid()==false){
+                            $this->_view->errors=$validate->showErrors();
+                        }else{
+                            $this->_arrParam['form']['type']=1;
+                            $this->_model->insert(DB_TBUSER, $this->_arrParam['form']);
+                            $toMail = $this->_arrParam['form']['email'];
+                            $activeCode=$this->_arrParam['form']['active_code'];
+                            URL::redirect('default', 'user', 'becomeMember',null,"becomeMember-$toMail-$activeCode.html");
+                        }
+                    }
             }
         }
 

@@ -1,6 +1,7 @@
 <?php
 
 $listVideo = $this->video;
+$listFavorite=$this->favoriteVideo;
 $listCourseRelative = $this->listCourseRelative;
 $infoCourse = $this->course;
 //handle link course
@@ -12,6 +13,15 @@ $url = $_SERVER['REQUEST_URI'];
 $nameAuthor = URL::filterURL($listVideo[0]['name_author']);
 $authorID = URL::filterURL($listVideo[0]['author_id']);
 $urlFindAuthor = URL::createLink('default', 'index', 'findAuthor', ['author' => $nameAuthor, 'author_id' => $authorID], "tac-gia-$nameAuthor/$authorID.html");
+$flagFavorite=0;
+if(isset($listFavorite)){
+    foreach ($listFavorite as $value) {
+        if ($value['id_course'] == $listVideo[0]['id_course']) {
+            $flagFavorite = 1;
+        }
+    }
+}
+
 ?>
 <!-- COURSE -->
 <section class="course-top">
@@ -34,6 +44,7 @@ $urlFindAuthor = URL::createLink('default', 'index', 'findAuthor', ['author' => 
                         }
                         $percent = $countProcess / count($this->video) * 100;
                         ?>
+
                         <div class="percent">Hoàn thành <span class="count"><?php echo round($percent, 0) ?>%</span>
                         </div>
                         <div class="progressbar">
@@ -42,7 +53,9 @@ $urlFindAuthor = URL::createLink('default', 'index', 'findAuthor', ['author' => 
                         <ul class="current-outline">
                             <li><span><?php echo $countProcess . "/" . count($this->video) ?></span>Video</li>
 
+                            <li class="favorite-course"> <i class="fa <?php echo ($flagFavorite==1)? 'fa-heart': 'fa-heart-o' ?>" aria-hidden="true"></i> Khóa học yêu thích</li>
                         </ul>
+
                     </div>
                     <!-- END / CURRENT PROGRESS -->
 
@@ -261,6 +274,9 @@ $session = Session::get('nameMenu');
 
 ?>
 <script type="text/javascript">
+    var nameOne='<?php echo $listVideo[0]['name_course']; ?>';
+    var idCourse='<?php echo $listVideo[0]['id_course'] ?>';
+    var infoUser='<?php echo Session::get('user')['info']['id'] ?>';
 
     $(function () {
         var session = '<?php echo $session?>';

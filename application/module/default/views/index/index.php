@@ -1,5 +1,6 @@
 <?php
 $listCategory = $this->listCategory;
+
 ?>
 
 <!-- SECTION 1 -->

@@ -35,8 +35,12 @@ $urlFile = TEMPLATE_URL . '/default/main';
 
     </script>
     <script type="text/javascript">
-        notice =  <?php echo json_encode(NOTICE_USER_VIEW_VIDEO)  ?>;
-        const NOTICE_USER_VIEW_VIDEO = notice;
+        noticeOne =  <?php echo json_encode(NOTICE_USER_VIEW_VIDEO)  ?>;
+        const NOTICE_USER_VIEW_VIDEO = noticeOne;
+        noticeTwo = <?php echo json_encode(NOTICE_USER_FAVORITE_COURSE) ?>;
+        const NOTICE_USER_FAVORITE_COURSE=noticeTwo;
+        noticeThree = <?php echo json_encode(NOTICE_USER_REMOVE_FAVORITE_COURSE) ?>;
+        const NOTICE_USER_REMOVE_FAVORITE_COURSE=noticeThree;
 
     </script>
     <!--[if lt IE 9]>

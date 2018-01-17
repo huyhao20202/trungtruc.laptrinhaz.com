@@ -138,7 +138,9 @@ foreach ($arrCourseHeader as $key => $val) {
             <ul class="list-account-info">
                 <li class="list-item account">
                     <div class="account-info item-click">
-                        <?php if(!empty($infoUserLogin['avatar'])){
+                        <?php
+                        $fileAvatar=$urlImage.'/avatar/'.$infoUserLogin['avatar'];
+                        if(!empty($infoUserLogin['avatar']) || file_exists($fileAvatar)){
                         ?>
                         <img src="<?php echo $urlImage.'/avatar/'.$infoUserLogin['avatar']; ?>" alt="">
                         <?php }else{

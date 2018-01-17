@@ -77,31 +77,9 @@ $(function () {
             dataType:"text",
             data:{idVideo: idVideo},
             success: function (data) {
+                // notify course plus point
                 if(data=="yes"){
-                    $.notify({
-                        // options
-                        icon: 'https://zendvn.com/wp-content/uploads/2016/12/zendvn-logo3.png',
-                        title: 'Chúc mừng!',
-                        message: NOTICE_USER_VIEW_VIDEO
-                    }, {
-                        // settings
-                        type: 'info',
-                        z_index: 2000,
-                        placement: {
-                            from: "bottom",
-                            align: "right"
-                        },
-                        animate: {
-                            enter: 'animated fadeInDown',
-                            exit: 'animated fadeOutUp'
-                        },
-                        icon_type: 'image',
-                        template: '<div data-notify="container" class="col-xs-11 col-sm-3 alert alert-{0}" role="alert">' +
-                        '<img data-notify="icon" class="img-circle pull-left">' +
-                        '<span data-notify="title">{1}</span>' +
-                        '<span data-notify="message">{2}</span>' +
-                        '</div>'
-                    });
+                    noticeUser(NOTICE_USER_VIEW_VIDEO);
                 }
 
 
@@ -110,10 +88,65 @@ $(function () {
 
 
     })
+    $(".favorite-course").click(function () {
+        var id=infoUser;
+        var nameCourse=nameOne;
+        var linkCourse=$(location).attr('href');
+        var courseId=idCourse;
+        var check=$(this).children().attr('class');
+
+        if( check == 'fa fa-heart-o'){
+            $(this).children().attr('class','fa fa-heart');
+            noticeUser(NOTICE_USER_FAVORITE_COURSE);
+
+        }else if(check == 'fa fa-heart'){
+            $(this).children().attr('class','fa fa-heart-o');
+            noticeUser(NOTICE_USER_REMOVE_FAVORITE_COURSE);
+        }
+        $.ajax({
+            url:ROOT_URL+'index.php?module=default&controller=course&action=favoriteCourse',
+            dataType:'text',
+            data:{  idCourse:courseId,
+                    nameCourse:nameCourse,
+                    linkCourse:linkCourse,
+                    idUser:id},
+            success:function (data) {
+                console.log(data);
+            }
+
+        })
+
+    })
 
 
 
 });
+function noticeUser(message) {
+    $.notify({
+        // options
+        // icon: 'https://zendvn.com/wp-content/uploads/2016/12/zendvn-logo3.png',
+
+        message: message
+    }, {
+        // settings
+        type: 'info',
+        z_index: 2000,
+        placement: {
+            from: "bottom",
+            align: "right"
+        },
+        animate: {
+            enter: 'animated fadeInDown',
+            exit: 'animated fadeOutUp'
+        },
+        icon_type: 'image',
+        template: '<div data-notify="container" class="col-xs-11 col-sm-3 alert alert-{0}" role="alert">' +
+        '<img data-notify="icon" class="img-circle pull-left">' +
+        '<span data-notify="title">{1}</span>' +
+        '<span data-notify="message">{2}</span>' +
+        '</div>'
+    });
+}
 
 
 
