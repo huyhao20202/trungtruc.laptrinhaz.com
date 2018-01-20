@@ -30,7 +30,6 @@ $(function () {
         var checked = $(this).children().toggleClass("md-check-2");
         $(this).parents(".o-view").toggleClass("active");
         $(this).parents(".o-view").children(".count").toggleClass("active");
-        console.log(checked[0].className);
         if (checked[0].className == "icon md-check-2") {
             $.ajax({
                 url: ROOT_URL + 'index.php?module=default&controller=course&action=setCookieView',
@@ -67,9 +66,6 @@ $(function () {
     });
     // js compute point
     $('.section-list .name-video').click(function () {
-
-
-
         var idVideo=$(this).attr('id');
         $.ajax({
             url: ROOT_URL + 'index.php?module=default&controller=course&action=point',
@@ -88,6 +84,7 @@ $(function () {
 
 
     })
+    // video yêu thích và bỏ yêu thích
     $(".favorite-course").click(function () {
         var id=infoUser;
         var nameCourse=nameOne;
@@ -111,16 +108,54 @@ $(function () {
                     linkCourse:linkCourse,
                     idUser:id},
             success:function (data) {
-                console.log(data);
+
             }
 
         })
 
     })
+//load ajax học viên
+  $(window).load(function () {
+      var course=idCourse;
+      var load=nameMenu;
+      if(load=='#student'){
+          $.ajax({
+              url:ROOT_URL+'index.php?module=default&controller=course&action=student',
+              type:'post',
+              dataType:'html',
+              data:{course:course},
+              success:function(data){
+                  $("#student").html(data);
+              }
+          });
+      }
+  });
+    var isLoad=false;
+$(".tab-student").click(function () {
+    var course=idCourse;
+
+    if(isLoad==false){
+        $.ajax({
+            url:ROOT_URL+'index.php?module=default&controller=course&action=student',
+            type:'post',
+            dataType:'html',
+            data:{course:course},
+            success:function(data){
+                $("#student").html(data);
+                isLoad=true;
+            }
+        });
+
+
+    }
+});
+
+
 
 
 
 });
+//notify
 function noticeUser(message) {
     $.notify({
         // options

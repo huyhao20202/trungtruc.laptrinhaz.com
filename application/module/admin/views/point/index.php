@@ -47,9 +47,7 @@ $url=['edit'=>URL::createLink('admin','point','edit'),
                                                     <td><input type="checkbox" name="cid[]"
                                                                value="<?php echo $value['id'] ?>">
                                                     </td>
-                                                    <td><a href="#"
-                                                           onclick="submitForm('<?php echo $url['edit'] . "&id=" . $value['id'] ?>')"
-                                                        ><?php echo $value['all_point'] ?></td>
+                                                    <td><?php echo $value['all_point'] ?></td>
                                                     <td><?php echo $value['fullname'] ?></td>
                                                     <td><a href="<?php echo $url['history'].'&idUser='.$value['id']?>"><?php echo $value['email'] ?></a></td>
                                                     <td><?php if(isset($value['notice'])) echo "Waiting..."?></td>

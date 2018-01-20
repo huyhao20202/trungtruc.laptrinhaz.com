@@ -95,7 +95,7 @@ $url = array(
                                                     <td class="text-center status">
                                                         <?php
                                                         $onclick = URL::createLink('admin', 'video', 'ajaxStatus', ['id' => $value['id'], 'status' => $value['status']]);
-                                                        echo '<i onclick="javascript:ajaxStatus(\'' . $onclick . '\')" id="status-' . $value['id'] . '">' . ($value['status'] ? 'on' : 'off') . '</i>';
+                                                        echo '<i aria-hidden="true" onclick="javascript:ajaxStatus(\'' . $onclick . '\')" id="status-' . $value['id'] .'" class="fa ' . ($value['status'] ? 'fa-toggle-on' : 'fa-toggle-off') . '"></i>';
                                                         ?>
                                                     </td>
                                                     <td><?php echo $value['ordering'] ?></td>

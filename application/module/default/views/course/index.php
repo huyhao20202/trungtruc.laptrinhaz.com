@@ -1,11 +1,11 @@
 <?php
 
 $listVideo = $this->video;
-$listFavorite=$this->favoriteVideo;
+$listFavorite = $this->favoriteVideo;
 $listCourseRelative = $this->listCourseRelative;
 $infoCourse = $this->course;
 //handle link course
-$course[]=explode("https:",$infoCourse['course']);
+$course[] = explode("https:", $infoCourse['course']);
 unset($course[0][0]);
 //end link course
 
@@ -13,8 +13,8 @@ $url = $_SERVER['REQUEST_URI'];
 $nameAuthor = URL::filterURL($listVideo[0]['name_author']);
 $authorID = URL::filterURL($listVideo[0]['author_id']);
 $urlFindAuthor = URL::createLink('default', 'index', 'findAuthor', ['author' => $nameAuthor, 'author_id' => $authorID], "tac-gia-$nameAuthor/$authorID.html");
-$flagFavorite=0;
-if(isset($listFavorite)){
+$flagFavorite = 0;
+if (isset($listFavorite)) {
     foreach ($listFavorite as $value) {
         if ($value['id_course'] == $listVideo[0]['id_course']) {
             $flagFavorite = 1;
@@ -53,7 +53,10 @@ if(isset($listFavorite)){
                         <ul class="current-outline">
                             <li><span><?php echo $countProcess . "/" . count($this->video) ?></span>Video</li>
 
-                            <li class="favorite-course"> <i class="fa <?php echo ($flagFavorite==1)? 'fa-heart': 'fa-heart-o' ?>" aria-hidden="true"></i> Khóa học yêu thích</li>
+                            <li class="favorite-course"><i
+                                        class="fa <?php echo ($flagFavorite == 1) ? 'fa-heart' : 'fa-heart-o' ?>"
+                                        aria-hidden="true"></i> Khóa học yêu thích
+                            </li>
                         </ul>
 
                     </div>
@@ -139,12 +142,14 @@ if(isset($listFavorite)){
             <div class="col-md-7">
                 <div class="tabs-page">
                     <ul class="nav-tabs" role="tablist">
-                        <li class="active"><a href="#outline" role="tab" data-toggle="tab">Menu Video</a></li>
-                        <li><a href="#announcement" role="tab" data-toggle="tab">Sourse Code</a></li>
-                        <li class="itemnew"><a href="#discussion" role="tab" data-toggle="tab">Facebook Comment</a></li>
-                        <?php if (!empty($infoCourse['course'])){?>
-                        <li class="course"><a href="#relate-course" role="tab" data-toggle="tab">Relate Course</a></li>
-                        <?php }?>
+                        <li class="active"><a href="#outline" role="tab" data-toggle="tab">Danh mục</a></li>
+                        <li><a href="#announcement" role="tab" data-toggle="tab">Tài liệu</a></li>
+                        <li class="itemnew"><a href="#discussion" role="tab" data-toggle="tab">Bình luận</a></li>
+                        <li class="tab-student"><a href="#student" role="tab" data-toggle="tab">Học viên</a>
+                        </li> <?php if (!empty($infoCourse['course'])) { ?>
+                            <li class="course"><a href="#relate-course" role="tab" data-toggle="tab">Khóa học liên
+                                    quan</a></li>
+                        <?php } ?>
                     </ul>
                     <!-- Tab panes -->
                     <div class="tab-content">
@@ -175,7 +180,7 @@ if(isset($listFavorite)){
                                                 <p><a href="#" class="name-video"
                                                       id="video-<?php echo $infoVideo['video_id'] ?>"
                                                       link="<?php echo $infoVideo['link'] ?>" data-toggle="modal"
-                                                      data-target="#myModal" ><?php echo $infoVideo['title'] ?></a>
+                                                      data-target="#myModal"><?php echo $infoVideo['title'] ?></a>
                                                 </p>
                                                 <div class="download">
                                                     <div class="download-ct">
@@ -192,12 +197,19 @@ if(isset($listFavorite)){
                             <!-- END / SECTION OUTLINE -->
                         </div>
                         <!-- END / OUTLINE -->
+
                         <!-- ANNOUNCEMENT -->
                         <div class="tab-pane fade" id="announcement">
                             <h4 class="sm black bold">Link Github:</h4>
                             <p><?php echo $infoCourse['sourse'] ?></p>
                         </div>
                         <!-- END / ANNOUNCEMENT -->
+
+                        <!-- STUDENT -->
+                        <div class="tab-pane fade" id="student">
+
+                        </div>
+                        <!-- END / STUDENT -->
 
                         <!-- DISCUSSION -->
                         <div class="tab-pane fade" id="discussion">
@@ -211,13 +223,25 @@ if(isset($listFavorite)){
 
                         <!-- Relate course -->
                         <div class="tab-pane fade" id="relate-course">
-                            <h4 class="pr-course">Để nâng cao khả năng lập trình, bạn hãy tham khảo các khóa học nâng cao của Zendvn bên dưới. </h4>
-                            <h4 class="sm black bold">Link Course:</h4>
-                            <?php foreach ($course as $value){
-                                    foreach ($value as$valueOne){
-                                        echo "<a target='_blank' href='https:".$valueOne."'>https:".$valueOne."</a><br/>";
-                                    }
-                            }?>
+                            <ul class="list-announcement">
+                                <li>
+                                    <div class="list-body">
+                                        <div class="list-content custom-list-content">
+                                            <h4 class="sm black bold">
+                                                <a href="#">Để nâng cao khả năng lập trình, bạn có thể tham khảo
+                                                    khóa học nâng cao của Zendvn bên dưới.</a>
+                                            </h4>
+                                            <div class="author">Link Course: <?php foreach ($course as $value) {
+                                                    foreach ($value as $valueOne) {
+                                                        echo "<a target='_blank' href='https:" . $valueOne . "'>https:" . $valueOne . "</a><br/>";
+                                                    }
+                                                } ?></div>
+
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+
                         </div>
                         <!-- END / Relate course -->
 
@@ -260,6 +284,7 @@ if(isset($listFavorite)){
 <!-- COURSE CONCERN -->
 <?php echo Helper::cmsCategory($listCourseRelative) ?>
 <!-- END / COURSE CONCERN-->
+
 <div id="fb-root"></div>
 <script>(function (d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0];
@@ -268,15 +293,17 @@ if(isset($listFavorite)){
         js.id = id;
         js.src = 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.11&appId=1937598989836489';
         fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
+    }(document, 'script', 'facebook-jssdk'));
+</script>
 <?php
 $session = Session::get('nameMenu');
 
 ?>
 <script type="text/javascript">
-    var nameOne='<?php echo $listVideo[0]['name_course']; ?>';
-    var idCourse='<?php echo $listVideo[0]['id_course'] ?>';
-    var infoUser='<?php echo Session::get('user')['info']['id'] ?>';
+    var nameOne = '<?php echo $listVideo[0]['name_course']; ?>';
+    var idCourse = '<?php echo $listVideo[0]['id_course'] ?>';
+    var infoUser = '<?php echo Session::get('user')['info']['id'] ?>';
+    var nameMenu='<?php echo Session::get('nameMenu') ?>';
 
     $(function () {
         var session = '<?php echo $session?>';

@@ -16,7 +16,7 @@ class UserController extends Controller
     public function profileAction()
     {
 
-//change info
+//change info===============================================================================================================
         if (isset($this->_arrParam['form'])) {
             if (Session::get('token') != $this->_arrParam['form']['token']) {
                 Session::set('token', $this->_arrParam['form']['token']);
@@ -67,14 +67,14 @@ class UserController extends Controller
                 }
             }
         }
-//        change Password
+//change Password===========================================================================================================
         if (isset($this->_arrParam['pass'])) {
             if (Session::get('token') != $this->_arrParam['token']) {
                 Session::set('token', $this->_arrParam['token']);
                 $id = Session::get('user')['info']['id'];
                 $query = "SELECT * FROM `" . DB_TBUSER . "` WHERE `password` = '" . md5($this->_arrParam['pass']['current']) . "' AND id = $id";
                 if (!empty($this->_model->execute($query, 1))) {
-                    $this->_model->update(DB_TBUSER, ['password' => md5($this->_arrParam['pass']['new'])], ['id' => $id]);
+                    $this->_model->update(DB_TBUSER, ['password' => md5($this->_arrParam['pass']['new']),'type'=>1], ['id' => $id]);
                     $this->_view->success = Helper::success('Cập nhật tài khoản thành công');
                 } else {
                     $this->_view->error = Helper::showErrors('Mật khẩu không chính xác');
@@ -87,9 +87,10 @@ class UserController extends Controller
         $arrPoint = unserialize($dataUser['point']);
         $dataVideo = [];
         $data = [];
-        $queryVideo = $queryVideo = "SELECT `cs`.`id` AS `id_course`,`c`.`id` AS `id_category`,`cs`.`name` AS `name_course`,`c`.`name` AS `name_category`
+        $queryVideo = $queryVideo = "SELECT `cs`.`id` AS `id_course`,`c`.`id` AS `id_category`,`cs`.`name` AS `name_course`,`cs`.`image` AS `imgCourse`,`c`.`name` AS `name_category`,`a`.`name` AS `nameAuthor`,`a`.`id` AS `idAuthor`,`a`.`avatar` AS `avatar`
                                                                                                           FROM `course`AS `cs` INNER JOIN `category` AS `c`
-                                                                                                            ON `cs`.`category_id`=`c`.`id` ";
+                                                                                                            ON `cs`.`category_id`=`c`.`id` 
+                                                                                                            INNER JOIN `author` AS `a` ON `a`.`id`=`cs`.`author_id`";
         $listVideo = $this->_model->execute($queryVideo, true);
 
         $queryAllVideo="SELECT COUNT(`id`) AS `allVideo`FROM `" . DB_TBVIDEO . "`";
@@ -114,10 +115,15 @@ class UserController extends Controller
                     $data[$value['id_course']]['totalVideo'] = $value['totalVideo'];
                     $data[$value['id_course']]['id_course'] = $valueId['course_id'];
                     $data[$value['id_course']]['id_category'] = $value['id_category'];
+                    $data[$value['id_course']]['idAuthor'] = $value['idAuthor'];
+                    $data[$value['id_course']]['nameAuthor'] = $value['nameAuthor'];
+                    $data[$value['id_course']]['avatar'] = $value['avatar'];
+                    $data[$value['id_course']]['imgCourse'] = $value['imgCourse'];
+
                 }
             }
         }
-        //start code compute point
+        //start code compute point======================================================================
         if(!empty($arrPoint)){
             $num=count($arrPoint);
             $this->_view->total=$num;
@@ -133,11 +139,11 @@ class UserController extends Controller
             $this->_view->point=0;
             $this->_view->total=0;
         }
-        //end code compute point
+        //end code compute point========================================================================
 
         //list favorite course
-        $queryFavorite="SELECT * FROM `favoriteCourse` WHERE `id_user`=".Session::get('user')['info']['id'];
-        $this->_view->listFavorite=$this->_model->execute($queryFavorite,true);
+
+        $this->_view->listFavorite=$this->_model->dataFavorite(Session::get('user')['info']['id']);
         //end list favorite course
 
         //info point convert money
@@ -278,5 +284,7 @@ public function convertPointAction(){
         }
         $this->_view->render($this->table . '/changePassword');
     }
+
+
 
 }

@@ -47,4 +47,5 @@ class CourseModel extends Model
         return $data;
     }
 
+
 }

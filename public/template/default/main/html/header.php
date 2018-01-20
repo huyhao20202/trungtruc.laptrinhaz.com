@@ -45,7 +45,7 @@ foreach ($arrCourseHeader as $key => $val) {
     }
 
     if ($key == DB_TBCATEGORY || $key == DB_TBCOURSE)
-        $xhtmlCourse .= '<a href="#">' . "Top&nbsp;" . ucfirst($key) . '</a>';
+        $xhtmlCourse .= '<a href="#">' . "Top&nbsp;" .ucfirst($key). '</a>';
     else
         $xhtmlCourse .= '<a href="#">' . ucfirst($key) . '</a>';
     $xhtmlCourse .= '<ul class="sub-menu">';
@@ -104,9 +104,9 @@ foreach ($arrCourseHeader as $key => $val) {
 
             <!-- MENU -->
             <ul class="menu">
-                <li class="index"><a href="<?php echo $url['home'] ?>">Home</a></li>
+                <li class="index"><a href="<?php echo $url['home'] ?>">Trang chủ</a></li>
                 <li class=" megamenu col-4 course">
-                    <a href="#">Course</a>
+                    <a href="#">Khóa học</a>
                     <ul class="sub-menu">
                         <?php echo $xhtmlCourse ?>
                     </ul>
@@ -120,8 +120,8 @@ foreach ($arrCourseHeader as $key => $val) {
                 <li class="menu-item-has-children">
                     <a href="#">Login</a>
                     <ul class="sub-menu">
-                        <li><a href="<?php echo $url['login'];?>">Login</a></li>
-                        <li><a href="<?php echo $url['register'];?>">Register</a></li>
+                        <li><a href="<?php echo $url['login'];?>">Đăng nhập</a></li>
+                        <li><a href="<?php echo $url['register'];?>">Đăng ký</a></li>
                     </ul>
                 </li>
                 <?php }?>
@@ -139,8 +139,8 @@ foreach ($arrCourseHeader as $key => $val) {
                 <li class="list-item account">
                     <div class="account-info item-click">
                         <?php
-                        $fileAvatar=$urlImage.'/avatar/'.$infoUserLogin['avatar'];
-                        if(!empty($infoUserLogin['avatar']) || file_exists($fileAvatar)){
+                        $fileAvatar=$avatar=TEMPLATE_PATH . "/default/main/images/avatar/" . $infoUserLogin['avatar'];
+                        if(!empty($infoUserLogin['avatar']) && file_exists($fileAvatar)){
                         ?>
                         <img src="<?php echo $urlImage.'/avatar/'.$infoUserLogin['avatar']; ?>" alt="">
                         <?php }else{
@@ -150,8 +150,8 @@ foreach ($arrCourseHeader as $key => $val) {
                     </div>
                     <div class="toggle-account toggle-list">
                         <ul class="list-account">
-                            <li><a href="<?php echo $url['profile']?>"><i class="icon md-config"></i>Profile</a></li>
-                            <li><a href="<?php echo $url['logout']?>"><i class="icon md-arrow-right"></i>Sign Out</a></li>
+                            <li><a href="<?php echo $url['profile']?>"><i class="icon md-config"></i>Thông tin</a></li>
+                            <li><a href="<?php echo $url['logout']?>"><i class="icon md-arrow-right"></i>Đăng xuất</a></li>
                         </ul>
                     </div>
                 </li>

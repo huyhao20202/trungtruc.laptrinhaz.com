@@ -61,7 +61,7 @@ $url = [
                                     <input type="file" class="form-control" onchange="readURL(this);" name="avatar">
                                     <span class="help-block"><i style="color: red"> *</i>Select a new one if you want to change image</span>
                                     <div class="blah">
-                                        <img id="blah" src="#" height="50px"/>
+                                        <img id="blah" src="" height="50px"/>
                                     </div>
                                 </div>
                             </div>
