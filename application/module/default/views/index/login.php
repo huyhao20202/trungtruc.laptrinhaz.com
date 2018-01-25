@@ -14,7 +14,8 @@ $url = [
             <div class="col-xs-12 col-lg-4 pull-right">
                 <div class="form-login">
                     <form action="#" method="post">
-                        <h2 class="text-uppercase">sign in</h2>
+                        <h2 class="text-uppercase">Đăng nhập</h2>
+                        <div class="item-notice"><p class="ten-notice">Bạn có thể đăng nhập bằng tài khoản trên zendvn.com</p></div>
                         <p class="text-center" style="color: #FFFFFF">
                             <?php
                             if (isset($this->errors)) echo $this->errors;
@@ -31,15 +32,15 @@ $url = [
                             <label for="check">
                                 <i class="icon md-check-2"></i>
                                 Remember me</label>
-                            <a href="<?php echo $url['forgetPass']?>">Forget password?</a>
+                            <a href="<?php echo $url['forgetPass']?>">Quên mật khẩu?</a>
                         </div>
                         <div class="form-submit-1">
-                            <input type="submit" value="Sign In" class="mc-btn btn-style-1">
+                            <input type="submit" value="Đăng nhập" class="mc-btn btn-style-1">
                             <input type="hidden" value="<?php echo time() ?>" name="form[token]">
                         </div>
-                        <div class="link">
+                        <div class="link custom-link">
                             <a href="<?php echo $url['register'] ?>">
-                                <i class="icon md-arrow-right"></i>Don’t have account yet ? Join Us
+                                <i class="icon md-arrow-right "></i>Bạn chưa có tài khoản ? Click để đăng ký
                             </a>
                         </div>
                     </form>

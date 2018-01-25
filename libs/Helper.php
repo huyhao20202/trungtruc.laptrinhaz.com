@@ -98,7 +98,7 @@ class Helper
                 $xhtml .= '<a href="#" class="active"></a>';
                 $xhtml .= '<a href="#"></a>';
                 $xhtml .= '</div>';
-                $xhtml .= '<div class="price">Free</div>';
+                $xhtml .= '<div class="price">FREE</div>';
                 $xhtml .= '</div>';
                 $xhtml .= '</div>';
             }

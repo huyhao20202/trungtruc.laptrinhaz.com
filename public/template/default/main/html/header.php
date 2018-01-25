@@ -3,7 +3,7 @@ $url = [
     'login' => URL::createLink('default', 'index', 'login', null, "dang-nhap.html"),
     'register' => URL::createLink('default', 'index', 'register', null, "dang-ki.html"),
     'home' => URL::createLink("default", "index", "index", null, "trang-chu.html"),
-    'profile' => URL::createLink("default", "user", "profile", null, "profile.html"),
+    'profile' => URL::createLink("default", "profile", "profile", null, "profile.html"),
     'logout' => URL::createLink("default", "user", "logout",null,"dang-xuat.html")
 ];
 
@@ -20,8 +20,8 @@ $arrCourseHeader[DB_TBCOURSE] = $model->execute($queryCourse, 1);
 $queryCategory = "SELECT `id`,`name` FROM `" . DB_TBCATEGORY . "` ORDER BY `name` LIMIT 0,5";
 $arrCourseHeader[DB_TBCATEGORY] = $model->execute($queryCategory, 1);
 
-$queryAuthor = "SELECT `id`,`name` FROM `" . DB_TBAUTHOR . "` ORDER BY `name` LIMIT 0,5";
-$arrCourseHeader[DB_TBAUTHOR] = $model->execute($queryAuthor, 1);
+//$queryAuthor = "SELECT `id`,`name` FROM `" . DB_TBAUTHOR . "` ORDER BY `name` LIMIT 0,5";
+//$arrCourseHeader[DB_TBAUTHOR] = $model->execute($queryAuthor, 1);
 
 $queryCategory = "SELECT `id`,`name` FROM `" . DB_TBTAG . "` ORDER BY `name` LIMIT 0,5";
 $arrCourseHeader[DB_TBTAG] = $model->execute($queryCategory, 1);
@@ -30,16 +30,16 @@ $xhtmlCourse = "";
 foreach ($arrCourseHeader as $key => $val) {
     switch ($key) {
         case DB_TBCATEGORY:
-            $xhtmlCourse .= '<li class="menu-item-has-children" style="width: 30%">';
+            $xhtmlCourse .= '<li class="menu-item-has-children" style="width: 40%">';
             break;
         case DB_TBCOURSE:
-            $xhtmlCourse .= '<li class="menu-item-has-children" style="width: 35%">';
+            $xhtmlCourse .= '<li class="menu-item-has-children" style="width: 40%">';
             break;
-        case DB_TBAUTHOR:
-            $xhtmlCourse .= '<li class="menu-item-has-children" style="width: 22%">';
-            break;
+//        case DB_TBAUTHOR:
+//            $xhtmlCourse .= '<li class="menu-item-has-children" style="width: 22%">';
+//            break;
         case DB_TBTAG:
-            $xhtmlCourse .= '<li class="menu-item-has-children" style="width: 13%">';
+            $xhtmlCourse .= '<li class="menu-item-has-children" style="width: 20%">';
             break;
 
     }
@@ -64,12 +64,13 @@ foreach ($arrCourseHeader as $key => $val) {
 
             $urlCourse = URL::createLink('default', 'course', 'index', array('id_course' => $id_course, 'id_category' => $id_category), "$name_category/$name_course-$id_category-$id_course.html");
             $xhtmlCourse .= '<li><a href="' . $urlCourse . '">' . $o['name_course'] . '</a></li>';;
-        } elseif ($key == DB_TBAUTHOR) {
-            $nameAuthor = URL::filterURL($o['name']);
-            $authorID = URL::filterURL($o['id']);
-            $urlFindAuthor = URL::createLink('default', 'index', 'findAuthor', ['author' => $nameAuthor, 'author_id' => $authorID], "tac-gia-$nameAuthor/$authorID.html");
-            $xhtmlCourse .= '<li><a href="' . $urlFindAuthor . '">' . $o['name'] . '</a></li>';
-        } else {
+        }
+//        elseif ($key == DB_TBAUTHOR) {
+//            $nameAuthor = URL::filterURL($o['name']);
+//            $authorID = URL::filterURL($o['id']);
+//            $urlFindAuthor = URL::createLink('default', 'index', 'findAuthor', ['author' => $nameAuthor, 'author_id' => $authorID], "tac-gia-$nameAuthor/$authorID.html");
+//            $xhtmlCourse .= '<li><a href="' . $urlFindAuthor . '">' . $o['name'] . '</a></li>';
+        else {
             $text = "tim-kiem-tag";
             $valueTag = $o['name'];
             $urlTag = URL::createLink('default', 'index', 'findTag', ['tag' => $o['name']], "$text-$valueTag.html");
@@ -118,7 +119,7 @@ foreach ($arrCourseHeader as $key => $val) {
                 if(!session::get('user')){
                 ?>
                 <li class="menu-item-has-children">
-                    <a href="#">Login</a>
+                    <a href="#">Đăng nhập</a>
                     <ul class="sub-menu">
                         <li><a href="<?php echo $url['login'];?>">Đăng nhập</a></li>
                         <li><a href="<?php echo $url['register'];?>">Đăng ký</a></li>

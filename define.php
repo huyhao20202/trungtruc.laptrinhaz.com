@@ -50,11 +50,14 @@ define('FILE_PLAYLIST_JSON', 'data/playlists.json');
 
 define('DOMAIN', 'http://trungtruc.laptrinhaz.com');
 // ====================== NOTICE ===========================
-define('NOTICE_USER_VIEW_VIDEO', 'Chúc mừng!Bạn đã được cộng 1 điểm');
+define('NOTICE_USER_VIEW_VIDEO', 'Chúc mừng! Bạn đã được cộng 1 điểm');
 define('NOTICE_USER_FAVORITE_COURSE','Thêm khóa học yêu thích thành công!');
 define('NOTICE_USER_REMOVE_FAVORITE_COURSE','Xóa khóa học yêu thích thành công!');
 
+// ====================== minified ===========================
 
-
-
+define('MINIFIED_ALL_MEMBER',true);
+// ====================== email ===========================
+define('NAME_EMAIL','nhhao20202@gmail.com');
+define('PASS_EMAIL','huyhao100');
 

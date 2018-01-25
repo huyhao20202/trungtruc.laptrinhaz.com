@@ -18,8 +18,8 @@ function mailer($toMail,$userId,$activeCode)
     $mail->SMTPAuth = true;
 
 //set login details for Gmail account
-    $mail->Username = "nhhao20202@gmail.com";
-    $mail->Password = "huyhao100";
+    $mail->Username = NAME_EMAIL;
+    $mail->Password = PASS_EMAIL;
 
 //set type of protection
     $mail->SMTPSecure = "ssl"; //or we can use TLS
@@ -49,7 +49,7 @@ function mailer($toMail,$userId,$activeCode)
 //$mail->addAttachment(TEMPLATE_PATH."/default/main/images/author/luu-truong-hai-lan.jpg", 'zendvn.jpg');
 
 //set who is sending an email
-    $mail->setFrom('nhhao20202@gmail.com', 'zendvn');
+    $mail->setFrom(NAME_EMAIL, 'zendvn');
 
 //set where we are sending email (recipients)
     $mail->addAddress($toMail);
@@ -75,8 +75,8 @@ function mailForgetPass($toMail,$userId){
     $mail->SMTPAuth = true;
 
 //set login details for Gmail account
-    $mail->Username = "nhhao20202@gmail.com";
-    $mail->Password = "huyhao100";
+    $mail->Username = NAME_EMAIL;
+    $mail->Password = PASS_EMAIL;
 
 //set type of protection
     $mail->SMTPSecure = "ssl"; //or we can use TLS
@@ -104,7 +104,7 @@ function mailForgetPass($toMail,$userId){
 //    $mail->addAttachment(TEMPLATE_PATH."/default/main/images/author/luu-truong-hai-lan.jpg", 'zendvn.jpg');
 
 //set who is sending an email
-    $mail->setFrom('nhhao20202@gmail.com', 'zendvn');
+    $mail->setFrom(NAME_EMAIL, 'zendvn');
 
 //set where we are sending email (recipients)
     $mail->addAddress($toMail);

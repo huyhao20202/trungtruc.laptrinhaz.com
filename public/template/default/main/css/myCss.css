@@ -2,13 +2,177 @@
     margin: 0px;
     padding: 0px;
 }
+
+h4.title-sb {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.replied {
+    width: 29% !important;
+}
+
+.submissions.custom-submission {
+    width: 65%;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px !important;
+}
+
+.question-content.custom-question-content {
+    padding-top: 0;
+    display: table;
+    width: 100%;
+}
+
+h2.video-viewed {
+    text-align: center;
+    margin-left: 30px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 21px;
+    font-family: 'Lora', serif;
+    color: #858585;
+    padding-top: 12px;
+    font-size: 26px;
+}
+
+p.info-point {
+    margin-bottom: 0;
+    font-size: 25px;
+    color: #858585;
+    font-family: 'Lora', serif;
+    font-weight: 500;
+}
+
+i.fa.fa-star {
+    color: #3dabfa;
+}
+
+.form-login.custom-form-login {
+    padding: 34px;
+}
+
+.custom-link a {
+    font-size: 13px !important;
+}
+
+p.ten-notice {
+    color: wheat;
+}
+.nav-tabsPoint{
+    margin: 0;
+    padding: 25px;
+    list-style: none;
+    font-weight: 700;
+    font-family: 'Lato', sans-serif;
+
+}
+.total-point {
+    margin: 0 100px;
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+}
+
+.tab-content.custom-tab-content {
+    margin-top: 20px;
+}
+
+section.content.custom-content {
+    margin-top: 20px;
+}
+
+.statistical a {
+    color: #666666;
+}
+
+.statistical a:hover {
+    color: #666666;
+    font-family: 'Lora', serif;
+}
+
 /*custom-course*/
+i.fa.fa-users {
+    color: #37abf2;
+}
+.tab-list-student.custom-tab-list-student {
+    background: white;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+ul.list-student.custom-list-student {
+    max-height:  590px;
+    overflow-y: auto;
+    width: 101%;
+}
+
+h3.md.black {
+    padding-top: 15px;
+    padding-left: 13px;
+    margin-bottom:  0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+div#student {
+    background: white;
+}
 li.student-custom {
-    width:  30%;
+    width: 28%;
+    margin-left: 4%;
+}
+.list-body.custom-list-body {
+    margin-left: 47px;
+    margin-top: 10px;
+}
+cite.xsm.custom-xsm {
+    color: #666666;
 }
 /*end custom-course*/
 
 /*css profile*/
+.custom-create-course-content {
+    background-color: #fff;
+    padding: 10px 30px;
+    margin-top: 40px;
+    margin-bottom: 100px;
+}
+.custom-create-course-content h4 {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
+    color: #646472;
+    line-height: 1.6em;
+}
+.custom-create-course-content .create-item {
+    padding: 30px 0;
+    border-bottom: 2px solid #eee;
+}
+.custom-create-course-content .create-item .form-item input[type="password"] {
+    margin-top: 10px;
+    width: 100%;
+    max-width: none;
+    border: 1px solid #D4D4D4;
+    background-color: #fff;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    height: 30px;
+    padding: 0 12px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 13px;
+    color: #a6a6a6;
+}
+.custom-create-course-content .create-item .form-item span {
+    display: block;
+    font-size: 12px;
+    color: #a6a6a6;
+    line-height: 1.5em;
+    margin-top: 5px;
+}
+ul.list-bar.custom-list-bar {
+    border-bottom:  0;
+}
+.form-action.custom-form-action {
+    padding-left: 26%;
+    text-align: left;
+}
 input.custom-birthday {
     font-family: 'Lato', sans-serif;
     font-size: 14px;
@@ -28,6 +192,29 @@ ul.list-bar li {
 }
 .notActive-profile{
     display: none;
+}
+/*statistical*/
+.nav-tabs-custom {
+    position: relative;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 20px !important;
+    color: #666;
+    overflow: hidden;
+    background: unset;
+    box-shadow: unset;
+    margin-bottom:  0;
+    padding-left: 29px;
+    list-style-type:  none;
+}
+.nav-tabs-custom li a {
+    position: relative;
+    display: inline-block;
+    margin-right: 30px;
+    color: #666;
+    border: 0;
+    padding-top: 35px;
+    padding-bottom: 25px;
+    font-size: 31px;
 }
 /*end css profile*/
 /*css section favorite*/
@@ -423,16 +610,21 @@ li.active.point {
     color: #37ABF2 !important;
 }
 .statistical{
-    font-size: 20px;
+    font-size: 26px;
+    font-weight: 400;
 }
 .nav-tabsOne{
     margin: 0;
     padding: 25px;
     list-style: none;
     font-weight: 700;
-    font-family: 'Lato', sans-serif;
+    font-family: 'Lora', serif;
     border-bottom: 1px solid #ddd;
+    padding-left: 0;
+}
 
+ul.nav-tabsOne.custom-nav-tabsOne {
+    padding-bottom: 5px;
 }
 i.fa.fa-heart-o {
     color: #37abf2;
@@ -447,6 +639,9 @@ li.favorite-course {
     cursor: pointer;
 }
 .list-content.custom-list-content {
-    margin-left: 29px !important;
-    margin-right: 17px;
+    margin-left: 0px !important;
+    margin-right: 5px;
+}
+.list-content.custom-list-content:before{
+    content: unset !important;
 }

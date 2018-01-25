@@ -34,19 +34,41 @@ class Bootstrap
     public function callMethod()
     {
         $actionName = $this->_params['action'] . 'Action';
+
+
         if (method_exists($this->_controllerObj, $actionName)) {
             $module = $this->_params['module'];
+            $controller=$this->_params['controller'];
             $userInfo = Session::get('user');
             $logged = ($userInfo['login'] == true && $userInfo['time'] + TIME_LOGIN >= time());
-
-            if ($module == 'admin') {
+            if ($module == 'admin' ) {
                 if ($logged == true) {
+
                     $this->_controllerObj->$actionName();
 
                 } else {
                     $this->callLoginAction($module);
                 }
-            } else {
+            }
+            //login of user
+            else if($module == 'default') {
+                if ($controller == 'profile') {
+                    if ($logged == true) {
+                        $this->_controllerObj->$actionName();
+
+                    } else {
+                        $this->callLoginAction($module);
+
+                    }
+                }else{
+                    if($logged==false){
+                        Session::delete('user');
+                    }
+                    $this->_controllerObj->$actionName();
+                }
+            }
+            else {
+
                 $this->_controllerObj->$actionName();
             }
 
@@ -57,10 +79,13 @@ class Bootstrap
 
     private function callLoginAction($module = 'default')
     {
+
         Session::delete('user');
-        require_once(MODULE_PATH . DS . $module . DS . 'controllers' . DS . 'IndexController.php');
-        $indexController = new IndexController($this->_params);
-        $indexController->loginAction();
+            require_once(MODULE_PATH . DS . $module . DS . 'controllers' . DS . 'IndexController.php');
+            $indexController = new IndexController($this->_params);
+            $indexController->loginAction();
+
+
     }
 
 }

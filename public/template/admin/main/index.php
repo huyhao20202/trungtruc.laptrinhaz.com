@@ -1,5 +1,7 @@
 <?php
 $dirImg = $this->_dirImg;
+if (MINIFIED_ALL_MEMBER == true)
+    ob_start(); // Start output buffer capture.
 ?>
 <!DOCTYPE html>
 <html>
@@ -42,7 +44,7 @@ $dirImg = $this->_dirImg;
 
 <script>
     $(function () {
-        $('#example1').DataTable()
+        $('#example1').DataTable();
         $('#example2').DataTable({
             'paging': true,
             'lengthChange': false,
@@ -50,8 +52,23 @@ $dirImg = $this->_dirImg;
             'ordering': true,
             'info': true,
             'autoWidth': false
-        })
-    })
+        });
+    });
 </script>
 </body>
 </html>
+<?php
+if (MINIFIED_ALL_MEMBER == true) {
+    $output = ob_get_contents(); // This contains the output of yourtemplate.php
+    ob_end_clean(); // Clear the buffer.
+// Remove html comments
+    $output = preg_replace('/<!--(.*?)-->/', '', $output);
+
+// Merge multiple spaces into one space
+    $output = preg_replace('/\s+/', ' ', $output);
+
+// Remove space between tags. Skip the following if you want as it will also remove the space between <span>Hello</span> <span>World</span>.
+    preg_replace('/>\s+</', '><', $output);
+    echo $output;
+}
+?>

@@ -1,8 +1,11 @@
 <?php
 $urlImage = $this->_dirImg;
 $urlFile = TEMPLATE_URL . '/default/main';
-
+if (MINIFIED_ALL_MEMBER == true)
+    ob_start(); // Start output buffer capture.
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,6 +26,7 @@ $urlFile = TEMPLATE_URL . '/default/main';
           content="<?php echo DOMAIN . $urlImage . "/thumbnail/" . $this->course['imageThumbnail'] ?>">
 
     <title><?php echo $this->_title ?></title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&amp;subset=vietnamese" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Raleway:300,400,700,900' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Lora:400,700" rel="stylesheet">
@@ -111,3 +115,18 @@ $urlFile = TEMPLATE_URL . '/default/main';
 
 </body>
 </html>
+<?php
+if (MINIFIED_ALL_MEMBER == true) {
+    $output = ob_get_contents(); // This contains the output of yourtemplate.php
+    ob_end_clean(); // Clear the buffer.
+// Remove html comments
+    $output = preg_replace('/<!--(.*?)-->/', '', $output);
+//    $output = preg_replace('/\/\*(.*?)\*\//', '', $output);
+// Merge multiple spaces into one space
+    $output = preg_replace('/\s+/', ' ', $output);
+
+// Remove space between tags. Skip the following if you want as it will also remove the space between <span>Hello</span> <span>World</span>.
+    preg_replace('/>\s+</', '><', $output);
+    echo $output;
+}
+?>

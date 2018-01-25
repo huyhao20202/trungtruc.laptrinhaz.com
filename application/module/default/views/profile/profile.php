@@ -39,12 +39,12 @@ $url = ["convert" => URL::createLink('default', 'user', 'convertPoint', null, 'c
                     &nbsp;Thống kê
                 </a>
             </li>
-            <li>
-                <a href="" class="history">
-                    <i class="fa fa-history" aria-hidden="true"></i>
-                    &nbsp;Lịch sử
-                </a>
-            </li>
+            <!--            <li>-->
+            <!--                <a href="" class="history">-->
+            <!--                    <i class="fa fa-history" aria-hidden="true"></i>-->
+            <!--                    &nbsp;Lịch sử-->
+            <!--                </a>-->
+            <!--            </li>-->
             <li>
                 <a href="" class="learning">
                     <i class="fa fa-book" aria-hidden="true"></i>
@@ -68,13 +68,15 @@ $url = ["convert" => URL::createLink('default', 'user', 'convertPoint', null, 'c
     <!--    // thông tin-->
 
     <div class="container user">
-
+        <?php echo $this->error; ?>
+        <?php echo $this->success; ?>
         <section id="create-course-section" class="create-course-section">
             <div class="row">
                 <div class="col-md-3">
                     <div class="create-course-sidebar">
-                        <ul class="list-bar">
-                            <li class="active" id="create-course-content"><span class="count">1</span>Thông tin cá nhân</li>
+                        <ul class="list-bar custom-list-bar">
+                            <li class="active" id="create-course-content"><span class="count">1</span>Thông tin cá nhân
+                            </li>
                             <li id="changePass"><span class="count">2</span>Thay đổi mật khẩu</li>
                         </ul>
 
@@ -105,7 +107,8 @@ $url = ["convert" => URL::createLink('default', 'user', 'convertPoint', null, 'c
                                                      class="showAvatar" alt="" style="width: 100px;height: 100px; ">
                                             <?php } ?>
                                         </div>
-                                        <label for="file-avatar" class="custom-button-file"><i class="fa fa-cloud-upload" aria-hidden="true"></i></label>
+                                        <label for="file-avatar" class="custom-button-file"><i
+                                                    class="fa fa-cloud-upload" aria-hidden="true"></i></label>
                                         <input type="file" name="avatar-user" id="file-avatar"
                                                onchange="viewAvatar(this)">
                                     </div>
@@ -204,40 +207,73 @@ $url = ["convert" => URL::createLink('default', 'user', 'convertPoint', null, 'c
                             <input type="hidden" value="<?php echo time() ?>" name="form[token]">
                             <!-- END / birthday -->
 
-                            <div class="form-action">
+                            <div class="form-action custom-form-action">
                                 <input type="submit" value="Lưu thay đổi" class="mc-btn btn-style-1">
                             </div>
                         </form>
                     </div>
-<!--changePassword-->
+                    <!--changePassword-->
                     <div class="changePass hidden">
-                        <div class="row">
-                            <div class="col-md-12">
+                        <div class="col-md-12 ">
+                            <div class="custom-create-course-content">
                                 <form action="" method="post">
-                                    <div class="avatar-acount">
-                                        <div class="info-acount">
-                                            <div class="security">
-                                                <div class="tittle-security">
-                                                    <h5>Password</h5>
+                                    <!--current pass-->
+                                    <div class="promo-video create-item">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <h4>Mật khẩu hiện tại</h4>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <div class="form-item">
                                                     <input type="password" placeholder="Current password"
                                                            name="pass[current]" required">
                                                     <div class="error-current-pass"></div>
-                                                    <input type="password" placeholder="New password" name="pass[new]">
-                                                    <div class="password" style="color: red"></div>
-                                                    <input type="password" placeholder="Confirm password" class="confirm">
-                                                    <div class="confirmPassword" style="color: red"></div>
-                                                    <input type="hidden" value="<?php echo time() ?>" name="token">
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="input-save">
-                                            <input type="submit" value="Save changes"
-                                                   class="mc-btn btn-style-1 submitRegister">
+                                    </div>
+                                    <!--end current pass-->
+                                    <!--current pass-->
+                                    <div class="promo-video create-item">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <h4>Mật khẩu mới</h4>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <div class="form-item">
+                                                    <input type="password" placeholder="New password" name="pass[new]">
+                                                    <div class="password" style="color: red"></div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
+                                    <!--end current pass-->
+                                    <!--current pass-->
+                                    <div class="promo-video create-item">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <h4>Nhập lại mật khẩu</h4>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <div class="form-item">
+                                                    <input type="password" placeholder="Confirm password"
+                                                           class="confirm">
+                                                    <div class="confirmPassword" style="color: red"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" value="<?php echo time() ?>" name="token">
+                                    <!--end current pass-->
+                                    <div class="form-action custom-form-action">
+                                        <input type="submit" value="Lưu thay đổi"
+                                               class="mc-btn btn-style-1 submitRegister">
+                                    </div>
                                 </form>
+
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -248,182 +284,104 @@ $url = ["convert" => URL::createLink('default', 'user', 'convertPoint', null, 'c
     <!--//thống kê-->
 
     <div class="container assignment hidden">
-
-        <div class="table-asignment">
+        <div class="question-content-wrap">
             <div class="row">
-                <div class="col-md-4 box-point">
-                    <ul class="nav-tabsOne" role="tablist">
-                        <li class="point active"><a href="#" role="tab" data-toggle="tab">
-                                Tổng điểm đã đạt<br/> <?php echo $total ?> <i class="fa fa-star" aria-hidden="true"></i>
-                            </a>
-                        </li>
-
-                    </ul>
-                </div>
-                <div class="col-md-4 box-point">
-                    <ul class="nav-tabsOne" role="tablist">
-                        <li class="point active"><a href="#" role="tab" data-toggle="tab">
-                                Điểm hiện tại<br/> <?php echo $point ?> <i class="fa fa-star" aria-hidden="true"></i>
-                            </a></li>
-
-                    </ul>
-                </div>
-                <div class="col-md-4 box-point">
-                    <ul class="nav-tabsOne" role="tablist">
-                        <li class="point active"><a href="#" role="tab" data-toggle="tab">
-                                Giá trị điểm<br/> <?php echo 1 ?> <i class="fa fa-star"
-                                                                     aria-hidden="true"></i> <?php echo "= " . number_format($money[0]['current_money'], 0, '.', '.') . " VNĐ"; ?>
-                            </a></li>
-
-                    </ul>
-                </div>
-            </div>
-            <a class="convert-point" target="_blank" href="<?php echo $url['convert']; ?>">Đổi điểm</a>
-            <ul class="nav-tabs" role="tablist">
-                <li class="statistical"><a href="#" role="tab" data-toggle="tab">Video đã xem</a></li>
-
-            </ul>
-
-            <!-- Tab panes -->
-            <div class="tab-content">
-                <!-- MY SUBMISSIONS -->
-                <div class="tab-pane fade in active" id="mysubmissions">
-                    <div class="table-wrap">
-                        <!-- TABLE HEAD -->
-                        <div class="table-head">
-                            <div class="submissions"></div>
-                            <div class="tb-icon"></div>
-                        </div>
-                        <!-- END / TABLE HEAD -->
-
-                        <!-- TABLE BODY -->
-                        <div class="table-body">
-
-
-                            <!-- TABLE ITEM -->
-                            <?php foreach ($videoViewed as $key => $value) {
-                                ?>
-                                <div class="table-item new">
-                                    <div class="thead">
-                                        <div class="submissions"><a href="#"><?php echo $value['name_course'] ?></a>
-                                        </div>
-                                        <div class="total-subm"><?php echo $value['numVideo'] . '/' . $value['totalVideo'] ?></div>
-                                        <div class="replied"></div>
-                                        <div class="latest-reply"></div>
-                                        <div class="toggle tb-icon">
-                                            <a href="#"><i class="fa fa-angle-down"></i></a>
-                                        </div>
+                <div class="col-md-8">
+                    <h2 class="video-viewed">Video đã xem</h2>
+                    <div class="question-content custom-question-content">
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <!-- MY SUBMISSIONS -->
+                            <div class="tab-pane fade in active" id="mysubmissions">
+                                <div class="table-wrap">
+                                    <!-- TABLE HEAD -->
+                                    <div class="table-head">
+                                        <div class="submissions"></div>
+                                        <div class="tb-icon"></div>
                                     </div>
+                                    <!-- END / TABLE HEAD -->
 
-                                    <div class="tbody">
-                                        <!-- ITEM -->
-                                        <?php foreach ($value['title_video'] as $keyOne => $valueShow) { //code show title vs attachment link
-                                            $name_course = URL::filterURL($value['name_course']);
-                                            $name_category = URL::filterURL($value['name_category']);
-                                            $id_course = $value['id_course'];
-                                            $id_category = $value['id_category'];
-                                            $link = URL::createLink('default', 'course', 'index', array('id_course' => $id_course, 'id_category' => $id_category), "$name_category/$name_course-$id_category-$id_course-$keyOne.html");
+                                    <!-- TABLE BODY -->
+                                    <div class="table-body">
+
+
+                                        <!-- TABLE ITEM -->
+                                        <?php foreach ($videoViewed as $key => $value) {
                                             ?>
-                                            <div class="item">
-                                                <div class="submissions"><a target="_blank"
-                                                                            href="<?php echo $link ?>"><?php echo $valueShow ?></a>
+                                            <div class="table-item new custom-table-item">
+                                                <div class="thead">
+                                                    <div class="submissions custom-submission"><a href="#"><?php echo $value['name_course'] ?></a>
+                                                    </div>
+
+                                                    <div class="replied"><?php echo $value['numVideo'] . '/' . $value['totalVideo'] ?></div>
+
+                                                    <div class="toggle tb-icon">
+                                                        <a href="#"><i class="fa fa-angle-down"></i></a>
+                                                    </div>
                                                 </div>
-                                                <div class="total-subm">Viewed</div>
+
+                                                <div class="tbody">
+                                                    <!-- ITEM -->
+                                                    <?php foreach ($value['title_video'] as $keyOne => $valueShow) { //code show title vs attachment link
+                                                        $name_course = URL::filterURL($value['name_course']);
+                                                        $name_category = URL::filterURL($value['name_category']);
+                                                        $id_course = $value['id_course'];
+                                                        $id_category = $value['id_category'];
+                                                        $link = URL::createLink('default', 'course', 'index', array('id_course' => $id_course, 'id_category' => $id_category), "$name_category/$name_course-$id_category-$id_course-$keyOne.html");
+                                                        ?>
+                                                        <div class="item">
+                                                            <div class="submissions custom-submission"><a target="_blank"
+                                                                                        href="<?php echo $link ?>"><?php echo $valueShow ?></a>
+                                                            </div>
+
+                                                            <div class="replied">Đã xem</div>
+                                                        </div>
+                                                    <?php } ?>
+                                                    <!-- END / ITEM -->
+                                                </div>
                                             </div>
                                         <?php } ?>
-                                        <!-- END / ITEM -->
-                                    </div>
-                                </div>
-                            <?php } ?>
-                            <!-- END / TABLE ITEM -->
+                                        <!-- END / TABLE ITEM -->
 
+
+                                    </div>
+                                    <!-- END / TABLE BODY -->
+                                </div>
+
+                            </div>
+                            <!-- END / MY SUBMISSIONS -->
 
                         </div>
-                        <!-- END / TABLE BODY -->
                     </div>
 
                 </div>
-                <!-- END / MY SUBMISSIONS -->
 
+
+                <div class="col-md-4">
+                    <aside class="question-sidebar custom-question-sidebar">
+                        <div class="download-file-learn">
+                            <p class="info-point"> Thông tin điểm</p>
+                        </div>
+                        <div class="score-sb custom-score-sb">
+                            <h4 class="title-sb">Tổng điểm đạt được:<span><?php echo $total ?> <i class="fa fa-star" aria-hidden="true"></i></span></h4>
+                            <h4 class="title-sb">Điểm hiện tại:<span><?php echo $point ?> <i class="fa fa-star" aria-hidden="true"></i></span></h4>
+                        </div>
+                    </aside>
+                </div>
             </div>
         </div>
-    </div>
-    <!--    lịch sử -->
-    <div class="container history hidden">
-        <ul class="nav-tabs" role="tablist">
-            <li class="statistical"><a href="#" role="tab" data-toggle="tab">Lịch sử đổi điểm</a></li>
-
-        </ul>
-
-        <!-- Main content -->
-        <section class="content">
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="box">
-                        <!-- /.box-header -->
-                        <div class="box-body">
-                            <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <table id="example1" class="table table-bordered table-striped dataTable"
-                                               role="grid" aria-describedby="example1_info">
-                                            <thead>
-                                            <tr role="row">
-                                                <th>Điểm hiện tại</th>
-                                                <th>Đổi</th>
-                                                <th>Số tiền</th>
-                                                <th>Ngày đổi</th>
-                                                <th>Thời gian đổi</th>
-                                                <th>Trạng thái</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <?php
-                                            foreach ($history as $key => $value) { ?>
-                                                <tr role="row" class="odd">
-                                                    <td><?php echo $value['current_point'] ?></td>
-                                                    <td><?php echo $value['point_convert'] ?></td>
-                                                    <td><?php echo number_format($value['money'], 0, '.', '.') . " VNĐ" ?></td>
-                                                    <td><?php echo $value['date_convert'] ?></td>
-                                                    <td><?php echo $value['time'] ?></td>
-                                                    <td><?php if ($value['status'] == 0)
-                                                            echo "Chờ duyệt ...";
-                                                        else
-                                                            echo "Đã duyệt";
-                                                        ?></td>
-
-                                                </tr>
-
-                                                <?php
-                                            } ?>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /.box-body -->
-                    </div>
-                    <!--            </form>-->
-                    <!-- /.box -->
-                </div>
-                <!-- /.col -->
-            </div>
-            <!-- /.row -->
-        </section>
-
-        <!-- /.content -->
 
     </div>
+
     <!--đang học-->
     <div class="container learning hidden">
         <div class="table-asignment">
-            <ul class="nav-tabs" role="tablist">
+            <ul class="nav-tabsOne custom-nav-tabsOne" role="tablist">
                 <li class="statistical"><a href="#" role="tab" data-toggle="tab">Khóa học</a></li>
             </ul>
 
             <!-- Tab panes -->
-            <div class="tab-content">
+            <div class="tab-content custom-tab-content">
                 <!-- MY SUBMISSIONS -->
                 <div class="tab-pane fade in active" id="mysubmissions">
                     <div class="table-wrap">
@@ -462,7 +420,7 @@ $url = ["convert" => URL::createLink('default', 'user', 'convertPoint', null, 'c
                                             </div>
                                             <div class="percent-learn"><?php echo round($percent * 100, 0) ?>%<i
                                                         class="fa fa-trophy"></i></div>
-                                            <a target="_blank" href="<?php echo $link ?>" class="learnnow">Learn now<i
+                                            <a target="_blank" href="<?php echo $link ?>" class="learnnow">Đang học<i
                                                         class="fa fa-play-circle-o"></i></a>
                                         </div>
                                     </div>
@@ -482,12 +440,12 @@ $url = ["convert" => URL::createLink('default', 'user', 'convertPoint', null, 'c
     <!--    yêu thích-->
     <div class="container favorite hidden">
         <div class="table-asignment">
-            <ul class="nav-tabs" role="tablist">
+            <ul class="nav-tabsOne custom-nav-tabsOne" role="tablist">
                 <li class="statistical"><a href="#" role="tab" data-toggle="tab">Khóa học yêu thích</a></li>
             </ul>
 
             <!-- Tab panes -->
-            <div class="tab-content">
+            <div class="tab-content custom-tab-content">
                 <!-- MY SUBMISSIONS -->
                 <div class="tab-pane fade in active" id="mysubmissions">
                     <div class="table-wrap">
@@ -539,8 +497,9 @@ $url = ["convert" => URL::createLink('default', 'user', 'convertPoint', null, 'c
 
 </section>
 <!-- END / PROFILE -->
+
 <script>
-    //not favorite in profile
+    /*not favorite in profile*/
     $(".not-favorite").click(function () {
         $(this).parents(".custom-col").remove();
         var idUserP = '<?php echo Session::get('user')['info']['id'] ?>';
@@ -556,25 +515,28 @@ $url = ["convert" => URL::createLink('default', 'user', 'convertPoint', null, 'c
                 noticeUser(NOTICE_USER_REMOVE_FAVORITE_COURSE);
             }
 
-        })
-    })
-    //end
+        });
+    });
+    /*end*/
 
-//    active profile
+    /*  active profile */
     $(".list-bar li").click(function () {
         $(".list-bar *").removeClass("active");
         $(this).addClass("active");
-        var nameClass="."+$(this).attr('id');
-        $(nameClass).removeClass("hidden");
-        $(".all-profile ").find(".active-profile").removeClass("active-profile").addClass("hidden");
 
-        $(nameClass).addClass("active-profile");
-    })
+        var nameClass = "." + $(this).attr('id');
+        if ($(nameClass).hasClass("active-profile") == false) {
+            $(nameClass).removeClass("hidden");
+            $(".all-profile ").find(".active-profile").removeClass("active-profile").addClass("hidden");
+            $(nameClass).addClass("active-profile");
+        }
 
-//end active profile
-    //script table admin
+    });
+
+    /*end active profile*/
+    /*script table admin*/
     $(function () {
-        $('#example1').DataTable()
+        $('#example1').DataTable();
         $('#example2').DataTable({
             'paging': true,
             'lengthChange': false,
@@ -582,17 +544,17 @@ $url = ["convert" => URL::createLink('default', 'user', 'convertPoint', null, 'c
             'ordering': true,
             'info': true,
             'autoWidth': false
-        })
-    })
-    //end table admin
+        });
+    });
+    /*end table admin*/
 
     var email = "<?php echo $infoUser['email'] ?>";
     var password = 0;
     var passwordConfirm = 0;
     var currentPass = 0;
     $('.submitRegister').attr('disabled', 'disabled');
-    $('.submitRegister').attr('style', 'background:#808080');
-    // check new password
+    $('.submitRegister').attr('style', 'background:#37abf2');
+    /* check new password*/
     $("input[name='pass[new]']").change(function () {
         if ($("input[name='pass[new]']").val().length < 6) {
             password = 0;
@@ -607,7 +569,7 @@ $url = ["convert" => URL::createLink('default', 'user', 'convertPoint', null, 'c
         checkForm(password, passwordConfirm, '');
         checkAgain(currentPass, password, passwordConfirm);
     });
-    // check confirm password
+    /* check confirm password*/
     $("input.confirm").change(function () {
         if ($("input[name='pass[new]']").val() != $("input.confirm").val()) {
             passwordConfirm = 0;
@@ -617,7 +579,7 @@ $url = ["convert" => URL::createLink('default', 'user', 'convertPoint', null, 'c
         checkForm(password, passwordConfirm, '');
         checkAgain(currentPass, password, passwordConfirm);
     });
-    //check current password
+    /*check current password*/
     $("input[name='pass[current]']").change(function () {
         var value = $(this).val();
 
@@ -643,9 +605,9 @@ $url = ["convert" => URL::createLink('default', 'user', 'convertPoint', null, 'c
                 checkAgain(currentPass, password, passwordConfirm);
 
             }
-        })
+        });
 
-    })
+    });
 
     function checkForm(password, passwordConfirm, currentPass) {
         if (password == 1) {
@@ -683,9 +645,9 @@ $url = ["convert" => URL::createLink('default', 'user', 'convertPoint', null, 'c
         e.preventDefault();
         $(".changeInfo").toggleClass('appear');
         $("html,body").animate({scrollTop: $(".changeInfo").offset().top}, 400);
-    })
+    });
 
-    //chuyển tab qua lại
+    /*chuyển tab qua lại*/
     $(".user li a").click(function (e) {
         e.preventDefault();
         $(".user li").removeClass('current');
@@ -693,12 +655,12 @@ $url = ["convert" => URL::createLink('default', 'user', 'convertPoint', null, 'c
         $(".profile div.container").addClass('hidden');
         $(".profile ." + this.className).removeClass('hidden');
     });
-    //thời gian tắt thông báo
+    /*thời gian tắt thông báo*/
     setTimeout(function () {
         $(".container .alert").hide();
     }, 10000);
 
-    //show hình khi chọn
+    /*show hình khi chọn*/
     function viewAvatar(event) {
         var file = event.files[0];
         var reader = new FileReader();
@@ -709,7 +671,7 @@ $url = ["convert" => URL::createLink('default', 'user', 'convertPoint', null, 'c
         reader.readAsDataURL(file);
     }
 
-    //script of assignment
+    /*script of assignment*/
     $.each($('.table-wrap'), function () {
         $(this)
             .find('.table-item')

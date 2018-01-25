@@ -15,6 +15,7 @@ class IndexController extends Controller
 
     public function indexAction()
     {
+
         $this->_view->listCategory = $this->_model->getAllCategory();
         $this->_view->listFindCourse = $this->_model->getIDNameCategory();
         $this->_view->statistics = $this->_model->getStatistics();
@@ -71,9 +72,10 @@ class IndexController extends Controller
 
     public function loginAction()
     {
+
         $userInfo = Session::get('user');
-        if ($userInfo['login'] == true && $userInfo['time'] + TIME_LOGIN >= time()) {
-            URL::redirect('admin', 'index', 'index');
+        if ($userInfo['login'] == true ) {
+            URL::redirect('default', 'index', 'index', null, 'trang-chu.html');
         }
         if (isset($this->_arrParam['form'])) {
             //xét là tài khoản trên zendvn hay mới đăng ký
@@ -92,7 +94,7 @@ class IndexController extends Controller
             $validate->run();
             $this->_arrParam['form'] = $validate->getResult();
             if ($validate->isValid() == false) {
-                $this->_view->errors = "Invalid username or password.";
+                $this->_view->errors = "Invalid email or password.";
             } else {
                 if (isset($this->_arrParam['form']['check'])) {
                     Session::set('user', ['login' => true, 'info' => $this->_model->execute($queryUserName, true)[0], 'time' => time() + 24 * 60 * 60]);
@@ -102,6 +104,7 @@ class IndexController extends Controller
                     }else{
                         Session::set('compute', 0);
                     }
+                    URL::redirect('default', 'index', 'index', null, 'trang-chu.html');
                 }
                 else {
                     Session::set('user', ['login' => true, 'info' => $this->_model->execute($queryUserName, true)[0], 'time' => time()]);
@@ -120,6 +123,10 @@ class IndexController extends Controller
 //xử lý đăng ký form
     public function registerAction()
     {
+        $userInfo = Session::get('user');
+        if ($userInfo['login'] == true && $userInfo['time'] + TIME_LOGIN >= time() ) {
+            URL::redirect('default', 'index', 'index', null, 'trang-chu.html');
+        }
         if(session::get('user')){
             session::delete('user');
         }
@@ -143,27 +150,33 @@ class IndexController extends Controller
 
                 if (isset($this->_arrParam['form'])) {
                     date_default_timezone_set('Asia/Ho_Chi_Minh');
-                    if ($response->success) {
-                    unset($this->_arrParam['form']['confirmPassword']);
-                    unset($this->_arrParam['form']['token']);
-                    $this->_arrParam['form']['password'] = md5($this->_arrParam['form']['password']);
-                    $this->_arrParam['form']['active_code']=time();
-                    $this->_arrParam['form']['created']=date('Y-m-d H:i:s',time());
-                    $query="SELECT * FROM `user` WHERE `email` = '".$this->_arrParam['form']['email']."'";
-                    $validate=new Validate($this->_arrParam['form']);
-                    $validate->addRule('email','email-notExistRecord',['database'=>$this->_model,'query'=>$query]);
-                    $validate->run();
-                        $this->_arrParam['form']=$validate->getResult();
+                    if ($response->success ) {
+                        if ($this->_arrParam['form']['confirmPassword']==$this->_arrParam['form']['password']) {
+                            unset($this->_arrParam['form']['confirmPassword']);
+                            unset($this->_arrParam['form']['token']);
+                            $this->_arrParam['form']['password'] = md5($this->_arrParam['form']['password']);
+                            $this->_arrParam['form']['active_code'] = time();
+                            $this->_arrParam['form']['created'] = date('Y-m-d H:i:s', time());
+                            $query = "SELECT * FROM `user` WHERE `email` = '" . $this->_arrParam['form']['email'] . "'";
+                            $validate = new Validate($this->_arrParam['form']);
+                            $validate->addRule('email', 'email-notExistRecord', ['database' => $this->_model, 'query' => $query]);
+                            $validate->run();
+                            $this->_arrParam['form'] = $validate->getResult();
 
-                        if($validate->isValid()==false){
-                            $this->_view->errors=$validate->showErrors();
+                            if ($validate->isValid() == false) {
+                                $this->_view->errors = $validate->showErrors();
+                            } else {
+                                $this->_arrParam['form']['type'] = 1;
+                                $this->_model->insert(DB_TBUSER, $this->_arrParam['form']);
+                                $toMail = $this->_arrParam['form']['email'];
+                                $activeCode = $this->_arrParam['form']['active_code'];
+                                URL::redirect('default', 'user', 'becomeMember', null, "becomeMember-$toMail-$activeCode.html");
+                            }
                         }else{
-                            $this->_arrParam['form']['type']=1;
-                            $this->_model->insert(DB_TBUSER, $this->_arrParam['form']);
-                            $toMail = $this->_arrParam['form']['email'];
-                            $activeCode=$this->_arrParam['form']['active_code'];
-                            URL::redirect('default', 'user', 'becomeMember',null,"becomeMember-$toMail-$activeCode.html");
+                            $this->_view->errors = Helper::showErrors('Mật khẩu không khớp. Thử lại!');
                         }
+                    }else{
+                        $this->_view->errors = Helper::showErrors('reCaptcha chưa được chọn!');
                     }
             }
         }

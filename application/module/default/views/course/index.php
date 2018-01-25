@@ -142,13 +142,12 @@ if (isset($listFavorite)) {
             <div class="col-md-7">
                 <div class="tabs-page">
                     <ul class="nav-tabs" role="tablist">
-                        <li class="active"><a href="#outline" role="tab" data-toggle="tab">Danh mục</a></li>
+                        <li class="active"><a href="#outline" role="tab" data-toggle="tab">Dàn bài</a></li>
                         <li><a href="#announcement" role="tab" data-toggle="tab">Tài liệu</a></li>
                         <li class="itemnew"><a href="#discussion" role="tab" data-toggle="tab">Bình luận</a></li>
                         <li class="tab-student"><a href="#student" role="tab" data-toggle="tab">Học viên</a>
                         </li> <?php if (!empty($infoCourse['course'])) { ?>
-                            <li class="course"><a href="#relate-course" role="tab" data-toggle="tab">Khóa học liên
-                                    quan</a></li>
+                            <li class="course"><a href="#relate-course" role="tab" data-toggle="tab">Khóa học nâng cao</a></li>
                         <?php } ?>
                     </ul>
                     <!-- Tab panes -->
@@ -200,13 +199,22 @@ if (isset($listFavorite)) {
 
                         <!-- ANNOUNCEMENT -->
                         <div class="tab-pane fade" id="announcement">
-                            <h4 class="sm black bold">Link Github:</h4>
-                            <p><?php echo $infoCourse['sourse'] ?></p>
+                            <ul class="list-announcement">
+                                <li>
+                                    <div class="list-body">
+                                        <div class="list-content custom-list-content">
+                                            <div class="author"><p><?php echo $infoCourse['sourse'] ?></p> </div>
+
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+
                         </div>
                         <!-- END / ANNOUNCEMENT -->
 
                         <!-- STUDENT -->
-                        <div class="tab-pane fade" id="student">
+                        <div class="tab-pane custom-tab-pane fade" id="student">
 
                         </div>
                         <!-- END / STUDENT -->
@@ -228,8 +236,8 @@ if (isset($listFavorite)) {
                                     <div class="list-body">
                                         <div class="list-content custom-list-content">
                                             <h4 class="sm black bold">
-                                                <a href="#">Để nâng cao khả năng lập trình, bạn có thể tham khảo
-                                                    khóa học nâng cao của Zendvn bên dưới.</a>
+                                                Để nâng cao khả năng lập trình, bạn có thể tham khảo
+                                                    khóa học nâng cao của Zendvn bên dưới.
                                             </h4>
                                             <div class="author">Link Course: <?php foreach ($course as $value) {
                                                     foreach ($value as $valueOne) {

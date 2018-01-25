@@ -67,8 +67,6 @@ class CategoryController extends Controller
             } else {
                 if (!empty($form)) {
                     $id = $this->_view->infoItem['id'];
-                    echo $id;
-                    die;
                     $this->_model->updateCategory($form, ['id' => $id]);
                     $this->_view->success = Helper::success('Sửa thành công');
 

@@ -11,7 +11,7 @@
     4.  Slider
     5.  Main all
     6. Responsive
-    
+
 
 --------------------------------------------------------------------------------*/
 
@@ -154,7 +154,7 @@ html .awe-color {
   float: right;
 }
 p {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 14px;
   color: #666;
   line-height: 1.7em;
@@ -193,7 +193,7 @@ h4,
 }
 h5,
 .sm {
-  font-family: 'Lato', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 18px;
   line-height: 1.5em;
   color: #fff;
@@ -267,7 +267,7 @@ h6,
   -moz-border-radius: 5px;
   border-radius: 5px;
   cursor: pointer;
-  font-family: 'Lato', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 16px;
   height: 40px;
   line-height: 40px !important;
@@ -658,7 +658,7 @@ h6,
 }
 .mc-learning-item .percent-learn {
   display: inline-block;
-  font-family: 'Lato', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 16px;
   color: #666;
   margin-top: 14px;
@@ -669,7 +669,7 @@ h6,
 }
 .mc-learning-item .learnnow {
   float: right;
-  font-family: 'Lato', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 16px;
   color: #666;
   margin-top: 14px;
@@ -1445,7 +1445,7 @@ table.mc-table tbody .new .submissions a:before {
 .navigation .menu li a {
   position: relative;
   display: inline-block;
-  font-family: 'Lato', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 16px;
   font-weight: 700;
   color: #fff;
@@ -3257,9 +3257,9 @@ footer#footer.footer-style-2 {
   display: block;
   line-height: 30px;
   color: #666;
-  font-family: 'Lato', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 14px;
-  padding: 0 15px;
+  padding: 0 10px;
   -webkit-transition: all 0.3s ease 0s;
   -moz-transition: all 0.3s ease 0s;
   -ms-transition: all 0.3s ease 0s;
@@ -3764,8 +3764,8 @@ footer#footer.footer-style-2 {
 }
 .nav-tabs {
   position: relative;
-  font-family: 'Lato', sans-serif;
-  font-size: 16px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 15px;
   color: #666;
   overflow: hidden;
 }
@@ -3779,7 +3779,7 @@ footer#footer.footer-style-2 {
   padding-bottom: 25px;
 }
 .nav-tabs li.itemnew a:before {
-  content: '';
+  /* content: ''; */
   display: block;
   position: absolute;
   width: 7px;
@@ -4605,7 +4605,7 @@ footer#footer.footer-style-2 {
 .form-check label,
 .form-check a,
 .form-login .link a {
-  font-family: 'Lato', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 14px;
   font-weight: 700;
   color: #fff;
@@ -5141,7 +5141,7 @@ footer#footer.footer-style-2 {
 }
 .content-bar li a {
   display: block;
-  font-family: 'Lato', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 14px;
   color: #666;
   margin-right: 40px;
@@ -6786,7 +6786,7 @@ footer#footer.footer-style-2 {
 }
 .create-course-sidebar .list-bar li {
   display: block;
-  font-family: 'Lato', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 14px;
   color: #666;
   background-color: #DDD;
